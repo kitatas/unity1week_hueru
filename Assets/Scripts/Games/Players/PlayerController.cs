@@ -1,55 +1,45 @@
 using Configs;
+using Games.StageObjects;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Zenject;
 
 namespace Games.Players
 {
     public sealed class PlayerController : MonoBehaviour
     {
-        [SerializeField] private GameObject[] obj = null;
+        private IPlayerInput _playerInput;
+        private PlayerRaycaster _playerRaycaster;
+        private StageObjectTable _stageObjectTable;
+
+        [Inject]
+        private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster, StageObjectTable stageObjectTable)
+        {
+            _playerInput = playerInput;
+            _playerRaycaster = playerRaycaster;
+            _stageObjectTable = stageObjectTable;
+        }
 
         private void Start()
         {
-            var mainCamera = GetCamera();
-
             // オブジェクトのクリック
             this.UpdateAsObservable()
-                .Where(_ => Input.GetMouseButtonDown(0))
+                .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>
                 {
-                    // Rayでのオブジェクト取得
-                    var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                    var hit = Physics2D.Raycast(ray.origin, ray.direction);
-                    if (hit == false)
+                    var clickObject = _playerRaycaster.GetClickObject(_playerInput.MousePosition);
+                    if (clickObject == null)
                     {
                         return;
                     }
 
-                    var clickObject = hit.collider.gameObject;
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
-                        // ふやす処理
-                        Instantiate(GetGenerateObject(), clickObject.transform.position, Quaternion.identity);
+                        Instantiate(_stageObjectTable.GetStageObject(), clickObject.transform.position, Quaternion.identity);
                     }
                 })
                 .AddTo(this);
-        }
-
-        private static Camera GetCamera()
-        {
-            var mainCamera = Camera.main;
-            if (mainCamera == null)
-            {
-                mainCamera = FindObjectOfType<Camera>();
-            }
-
-            return mainCamera;
-        }
-
-        private GameObject GetGenerateObject()
-        {
-            return obj[Random.Range(0, obj.Length)];
         }
     }
 }
