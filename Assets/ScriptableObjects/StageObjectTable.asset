@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b97cb7067fd04b56ac0ae769c90a16e7, type: 3}
+  m_Name: StageObjectTable
+  m_EditorClassIdentifier: 
+  circle: {fileID: 1035859496630517542, guid: 7f9371f9899ca4dd2a2758c5cc5f5990, type: 3}
+  triangle: {fileID: 5836653216589184381, guid: aa84728c4e40643c4b0c8944ec4f9ee2,
+    type: 3}
+  square: {fileID: 1531098989726786428, guid: 0c3b1874a4fd142b4aec39dd8b07233e, type: 3}
