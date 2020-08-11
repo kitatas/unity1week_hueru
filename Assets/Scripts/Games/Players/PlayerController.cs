@@ -3,10 +3,12 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace Players
+namespace Games.Players
 {
     public sealed class PlayerController : MonoBehaviour
     {
+        [SerializeField] private GameObject[] obj = null;
+
         private void Start()
         {
             var mainCamera = GetCamera();
@@ -28,7 +30,7 @@ namespace Players
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
                         // ふやす処理
-                        Debug.Log(clickObject.name);
+                        Instantiate(GetGenerateObject(), clickObject.transform.position, Quaternion.identity);
                     }
                 })
                 .AddTo(this);
@@ -43,6 +45,11 @@ namespace Players
             }
 
             return mainCamera;
+        }
+
+        private GameObject GetGenerateObject()
+        {
+            return obj[Random.Range(0, obj.Length)];
         }
     }
 }
