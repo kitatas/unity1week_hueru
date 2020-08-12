@@ -13,16 +13,16 @@ namespace Games.Players
         private IPlayerInput _playerInput;
         private PlayerRaycaster _playerRaycaster;
         private IScoreUpdatable _scoreUpdatable;
-        private StageObjectTable _stageObjectTable;
+        private StageObjectRepository _stageObjectRepository;
 
         [Inject]
         private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
-            IScoreUpdatable scoreUpdatable, StageObjectTable stageObjectTable)
+            IScoreUpdatable scoreUpdatable, StageObjectRepository stageObjectRepository)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
             _scoreUpdatable = scoreUpdatable;
-            _stageObjectTable = stageObjectTable;
+            _stageObjectRepository = stageObjectRepository;
         }
 
         private void Start()
@@ -41,7 +41,7 @@ namespace Games.Players
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
                         _scoreUpdatable.UpdateScore();
-                        Instantiate(_stageObjectTable.GetStageObject(), clickObject.transform.position, Quaternion.identity);
+                        _stageObjectRepository.GenerateStageObject(clickObject.transform.position);
                     }
                 })
                 .AddTo(this);
