@@ -1,4 +1,5 @@
 using Configs;
+using Games.Score;
 using Games.StageObjects;
 using UniRx;
 using UniRx.Triggers;
@@ -11,13 +12,16 @@ namespace Games.Players
     {
         private IPlayerInput _playerInput;
         private PlayerRaycaster _playerRaycaster;
+        private IScoreUpdatable _scoreUpdatable;
         private StageObjectTable _stageObjectTable;
 
         [Inject]
-        private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster, StageObjectTable stageObjectTable)
+        private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
+            IScoreUpdatable scoreUpdatable, StageObjectTable stageObjectTable)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
+            _scoreUpdatable = scoreUpdatable;
             _stageObjectTable = stageObjectTable;
         }
 
@@ -36,6 +40,7 @@ namespace Games.Players
 
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
+                        _scoreUpdatable.UpdateScore();
                         Instantiate(_stageObjectTable.GetStageObject(), clickObject.transform.position, Quaternion.identity);
                     }
                 })
