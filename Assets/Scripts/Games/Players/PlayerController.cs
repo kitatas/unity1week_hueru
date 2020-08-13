@@ -1,8 +1,7 @@
 using Configs;
+using Games.Controllers;
 using Games.Score;
-using Games.StageObjects;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
 
@@ -13,22 +12,22 @@ namespace Games.Players
         private IPlayerInput _playerInput;
         private PlayerRaycaster _playerRaycaster;
         private IScoreUpdatable _scoreUpdatable;
-        private StageObjectRepository _stageObjectRepository;
+        private GameController _gameController;
 
         [Inject]
         private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
-            IScoreUpdatable scoreUpdatable, StageObjectRepository stageObjectRepository)
+            IScoreUpdatable scoreUpdatable, GameController gameController)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
             _scoreUpdatable = scoreUpdatable;
-            _stageObjectRepository = stageObjectRepository;
+            _gameController = gameController;
         }
 
         private void Start()
         {
             // オブジェクトのクリック
-            this.UpdateAsObservable()
+            _gameController.PlayingAsObservable
                 .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>
                 {
@@ -41,7 +40,7 @@ namespace Games.Players
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
                         _scoreUpdatable.UpdateScore();
-                        _stageObjectRepository.GenerateStageObject(clickObject.transform.position);
+                        _gameController.GenerateStageObject(clickObject.transform.position);
                     }
                 })
                 .AddTo(this);
