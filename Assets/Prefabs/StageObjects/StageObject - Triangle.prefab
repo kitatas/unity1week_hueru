@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5732139053768265743}
   - component: {fileID: 4378798787153561566}
   - component: {fileID: -7582601552229720055}
+  - component: {fileID: 7565742685374376253}
   m_Layer: 0
   m_Name: StageObject - Triangle
   m_TagString: StageObject
@@ -169,3 +170,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5d714af8bf44e7ae0708a291864b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954, type: 3}
+--- !u!114 &7565742685374376253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836653216589184381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 0

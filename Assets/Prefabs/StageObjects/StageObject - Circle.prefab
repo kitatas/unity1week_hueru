@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5430509136259512574}
   - component: {fileID: 2867850748798745750}
   - component: {fileID: 7351626018808270620}
+  - component: {fileID: 5042187284588109234}
   m_Layer: 0
   m_Name: StageObject - Circle
   m_TagString: StageObject
@@ -119,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.28
+  m_Radius: 1.35
 --- !u!114 &7351626018808270620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +133,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5d714af8bf44e7ae0708a291864b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954, type: 3}
+--- !u!114 &5042187284588109234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035859496630517542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717a02054ef2699498e6bd4234fd7995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containerSource: 0
