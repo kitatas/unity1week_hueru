@@ -1,6 +1,7 @@
 using Configs;
 using Games.Players;
 using Games.Score;
+using Online.Buttons;
 using Online.Controllers;
 using UniRx;
 using UnityEngine;
@@ -8,27 +9,31 @@ using Zenject;
 
 namespace Online.Players
 {
-    public class PlayerController : MonoBehaviour
+    public sealed class OnlinePlayerController : MonoBehaviour
     {
         private IPlayerInput _playerInput;
         private PlayerRaycaster _playerRaycaster;
         private IScoreUpdatable _scoreUpdatable;
-        private GameController _gameController;
+        private OnlineGameController _onlineGameController;
+        private ChangeTurnButton _changeTurnButton;
 
         [Inject]
         private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
-            IScoreUpdatable scoreUpdatable, GameController gameController)
+            IScoreUpdatable scoreUpdatable, OnlineGameController onlineGameController,
+            ChangeTurnButton changeTurnButton)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
             _scoreUpdatable = scoreUpdatable;
-            _gameController = gameController;
+            _onlineGameController = onlineGameController;
+            _changeTurnButton = changeTurnButton;
         }
 
         private void Start()
         {
             // オブジェクトのクリック
-            _gameController.PlayingAsObservable
+            _onlineGameController.PlayingAsObservable
+                .Where(_ => _changeTurnButton.IsMyTurn)
                 .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>
                 {
@@ -41,7 +46,7 @@ namespace Online.Players
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
                         _scoreUpdatable.UpdateScore();
-                        // _gameController.GenerateStageObject(clickObject.transform.position);
+                        _onlineGameController.GenerateStageObject(clickObject.transform.position);
                     }
                 })
                 .AddTo(this);

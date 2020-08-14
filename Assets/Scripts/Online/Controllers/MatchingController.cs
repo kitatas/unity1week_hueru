@@ -7,12 +7,12 @@ namespace Online.Controllers
 {
     public sealed class MatchingController : MonoBehaviour
     {
-        private StartPresenter _startPresenter;
+        private OnlineGameController _onlineGameController;
 
         [Inject]
-        private void Construct(StartPresenter startPresenter)
+        private void Construct(OnlineGameController onlineGameController)
         {
-            _startPresenter = startPresenter;
+            _onlineGameController = onlineGameController;
 
             PhotonNetwork.ConnectUsingSettings(Application.version);
         }
@@ -51,7 +51,7 @@ namespace Online.Controllers
             if (IsMaxPlayer())
             {
                 PhotonNetwork.room.IsOpen = false;
-                _startPresenter.SetStartGame();
+                _onlineGameController.SetStartGame();
             }
         }
 

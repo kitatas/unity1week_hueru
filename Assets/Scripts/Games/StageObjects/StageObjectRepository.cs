@@ -21,12 +21,17 @@ namespace Games.StageObjects
             stageObject.transform.position = GetGeneratePosition(clickObjectPosition);
         }
 
+        public string GetGenerateStageObjectName()
+        {
+            return _stageObjectTable.GetStageObject().name;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="clickObjectPosition"></param>
         /// <returns></returns>
-        private Vector3 GetGeneratePosition(Vector3 clickObjectPosition)
+        public Vector3 GetGeneratePosition(Vector3 clickObjectPosition)
         {
             var random = Random.Range(0f, 360f);
             var theta = random * Mathf.PI / 180f;
