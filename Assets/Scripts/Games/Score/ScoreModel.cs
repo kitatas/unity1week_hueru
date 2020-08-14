@@ -13,6 +13,8 @@ namespace Games.Score
 
         public IReadOnlyReactiveProperty<int> Score => _score;
 
+        public int GetScore() => _score.Value;
+
         public void UpdateScore()
         {
             _score.Value++;

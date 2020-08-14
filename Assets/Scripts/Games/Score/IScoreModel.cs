@@ -5,5 +5,6 @@ namespace Games.Score
     public interface IScoreModel
     {
         IReadOnlyReactiveProperty<int> Score { get; }
+        int GetScore();
     }
 }
