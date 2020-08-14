@@ -4,5 +4,6 @@ namespace Configs
     {
         Title,
         Main,
+        Online,
     }
 }
