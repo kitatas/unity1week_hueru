@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/Online.unity
+    guid: ea795deb525c249c49bf837217acd44b
+  - enabled: 1
     path: Assets/unityroom/ranking/Scenes/Ranking.unity
     guid: 152244f5855414ac4a3874f14efa583c
   m_configObjects: {}
