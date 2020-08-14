@@ -9,6 +9,8 @@ namespace Games.Controllers
 {
     public sealed class GameController : MonoBehaviour
     {
+        [SerializeField] private bool isFinishDebug = false;
+
         private bool _isStart;
         private ReactiveProperty<bool> _isGameOver;
 
@@ -26,7 +28,8 @@ namespace Games.Controllers
             startPresenter.Play(() =>
             {
                 _isStart = true;
-                GenerateStageObject(Vector3.zero);
+                var position = isFinishDebug ? new Vector3(2.5f, 1.5f) : Vector3.zero;
+                GenerateStageObject(position);
             });
 
             _isGameOver

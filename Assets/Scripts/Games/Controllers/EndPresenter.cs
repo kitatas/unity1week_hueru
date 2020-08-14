@@ -36,17 +36,33 @@ namespace Games.Controllers
             FadeInText();
             FadeInButton(_tweetButton.Button);
             FadeInButton(_rankingButton.Button);
+
+            _tweetButton.PlayEffect();
+            _rankingButton.PlayEffect();
         }
 
         private void FadeInText()
         {
+            var offsetAddValue = new Vector3(0f, 30f, 0f);
+            var tmpAnimator = new DOTweenTMPAnimator(gameOverText);
             gameOverText
-                .DOFade(_fadeInValue, _animationTime)
-                .SetEase(Ease.Linear);
+                .DOFade(0f, 0f);
 
-            gameOverText.rectTransform
-                .DOScale(Vector3.one, _animationTime)
-                .SetEase(Ease.OutBack);
+            for (int i = 0; i < tmpAnimator.textInfo.characterCount; i++)
+            {
+                tmpAnimator.DOScaleChar(i, 0.7f, 0f);
+                var offset = tmpAnimator.GetCharOffset(i);
+                DOTween.Sequence()
+                    .Append(tmpAnimator
+                        .DOOffsetChar(i, offset + offsetAddValue, 0.4f)
+                        .SetEase(Ease.OutFlash, 2f))
+                    .Join(tmpAnimator
+                        .DOFadeChar(i, _fadeInValue, 0.4f))
+                    .Join(tmpAnimator
+                        .DOScaleChar(i, _fadeInValue, 0.4f)
+                        .SetEase(Ease.OutBack))
+                    .SetDelay(0.07f * i);
+            }
         }
 
         private void FadeInButton(Button button)

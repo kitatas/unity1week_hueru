@@ -9,6 +9,8 @@ namespace Games.Buttons
     [RequireComponent(typeof(Button))]
     public sealed class RankingButton : MonoBehaviour
     {
+        [SerializeField] private GameObject effect = null;
+
         public Button Button { get; private set; }
 
         private IScoreModel _scoreModel;
@@ -33,6 +35,12 @@ namespace Games.Buttons
                 .OnClickAsObservable()
                 .Subscribe(_ => _rankingLoader.SendScoreAndShowRanking(_scoreModel.GetScore()))
                 .AddTo(this);
+        }
+
+        public void PlayEffect()
+        {
+            var position = new Vector3(0.85f, 1.4f, 0f);
+            Instantiate(effect, position, Quaternion.identity);
         }
     }
 }

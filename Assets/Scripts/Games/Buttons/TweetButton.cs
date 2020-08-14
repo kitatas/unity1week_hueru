@@ -9,6 +9,8 @@ namespace Games.Buttons
     [RequireComponent(typeof(Button))]
     public sealed class TweetButton : MonoBehaviour
     {
+        [SerializeField] private GameObject effect = null;
+
         public Button Button { get; private set; }
 
         private readonly string _gameId = "huyasu_huyasu";
@@ -37,6 +39,12 @@ namespace Games.Buttons
                     UnityRoomTweet.Tweet(_gameId, tweetText);
                 })
                 .AddTo(this);
+        }
+
+        public void PlayEffect()
+        {
+            var position = new Vector3(-0.85f, 1.4f, 0f);
+            Instantiate(effect, position, Quaternion.identity);
         }
     }
 }
