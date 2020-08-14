@@ -8,7 +8,7 @@ using Zenject;
 namespace Online.Buttons
 {
     [RequireComponent(typeof(Button))]
-    public class DisconnectButton : MonoBehaviour
+    public sealed class DisconnectButton : MonoBehaviour
     {
         private SceneLoader _sceneLoader;
 

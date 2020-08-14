@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Configs;
 using Cysharp.Threading.Tasks;
 using Games.Controllers;
 using Games.StageObjects;
@@ -20,18 +21,19 @@ namespace Online.Controllers
 
         private PhotonView _photonView;
         private StartPresenter _startPresenter;
-        private OnlineStartPresenter _onlineStartPresenter;
         private ChangeTurnButton _changeTurnButton;
+        private OnlineStartPresenter _onlineStartPresenter;
         private StageObjectRepository _stageObjectRepository;
 
         [Inject]
-        private void Construct(StartPresenter startPresenter, OnlineStartPresenter onlineStartPresenter,
-            ChangeTurnButton changeTurnButton, StageObjectRepository stageObjectRepository)
+        private void Construct(StartPresenter startPresenter, ChangeTurnButton changeTurnButton,
+            OnlineStartPresenter onlineStartPresenter, OnlineEndPresenter onlineEndPresenter,
+            StageObjectRepository stageObjectRepository)
         {
             _photonView = GetComponent<PhotonView>();
             _startPresenter = startPresenter;
-            _onlineStartPresenter = onlineStartPresenter;
             _changeTurnButton = changeTurnButton;
+            _onlineStartPresenter = onlineStartPresenter;
             _stageObjectRepository = stageObjectRepository;
 
             _isStart = false;
@@ -41,6 +43,10 @@ namespace Online.Controllers
                 .Subscribe(_ =>
                 {
                     // 終了演出
+                    var finishType = _changeTurnButton.IsMyTurn ? FinishType.Lose : FinishType.Win;
+                    onlineEndPresenter.Play(finishType);
+                    _onlineStartPresenter.ShowBackTitleButton();
+                    _changeTurnButton.ActivateTurnText(false);
                 })
                 .AddTo(this);
         }
@@ -57,7 +63,7 @@ namespace Online.Controllers
         [PunRPC]
         private void StartGame()
         {
-            matchingText.gameObject.SetActive(false);
+            matchingText.enabled = false;
             _changeTurnButton.SetPlayerTurn(PhotonNetwork.isMasterClient);
             _startPresenter.Play(() =>
             {
@@ -69,7 +75,7 @@ namespace Online.Controllers
                 }
             });
 
-            _onlineStartPresenter.DisplayText();
+            _onlineStartPresenter.Play();
 
             var token = this.GetCancellationTokenOnDestroy();
             CheckDisconnectedAsync(token).Forget();
@@ -79,8 +85,12 @@ namespace Online.Controllers
         {
             await UniTask.WaitUntil(() => PhotonNetwork.room.PlayerCount != 2, cancellationToken: token);
 
-            matchingText.gameObject.SetActive(true);
-            matchingText.text = $"通信が切断されました。";
+            if (_isFinish.Value == false)
+            {
+                matchingText.enabled = true;
+                matchingText.text = "通信が切断されました。";
+                _onlineStartPresenter.ShowBackTitleButton();
+            }
         }
 
         public void GenerateStageObject(Vector3 generatePosition)

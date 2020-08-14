@@ -1,4 +1,6 @@
 using Configs;
+using Games.Players;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +11,7 @@ namespace Online.Buttons
     [RequireComponent(typeof(PhotonView))]
     public sealed class ChangeTurnButton : MonoBehaviour
     {
-        [SerializeField] private TMPro.TextMeshProUGUI myTurnText = null;
-        [SerializeField] private TMPro.TextMeshProUGUI currentTurnText = null;
+        [SerializeField] private TextMeshProUGUI currentTurnText = null;
         private Turn _myTurn;
         private ReactiveProperty<Turn> _currentTurn;
 
@@ -22,18 +23,15 @@ namespace Online.Buttons
             _button = GetComponent<Button>();
             _photonView = GetComponent<PhotonView>();
 
+            ActivateTurnText(false);
             _button.interactable = false;
 
             _myTurn = Turn.None;
-            myTurnText.text = $"自分のターン名:{_myTurn.ToString()}";
 
             _currentTurn = new ReactiveProperty<Turn>(Turn.Master);
             _currentTurn
-                .Subscribe(_ =>
-                {
-                    // 
-                    currentTurnText.text = $"現在のターン:{_currentTurn.Value.ToString()}";
-                })
+                .SkipLatestValueOnSubscribe()
+                .Subscribe(_ => UpdateTurnText())
                 .AddTo(this);
         }
 
@@ -42,11 +40,7 @@ namespace Online.Buttons
             _button
                 .OnClickAsObservable()
                 .Where(_ => IsMyTurn)
-                .Subscribe(_ =>
-                {
-                    // Debug.Log("ターン終了");
-                    _photonView.RPC(nameof(ChangeTurn), PhotonTargets.All);
-                })
+                .Subscribe(_ => _photonView.RPC(nameof(ChangeTurn), PhotonTargets.All))
                 .AddTo(this);
         }
 
@@ -60,10 +54,27 @@ namespace Online.Buttons
         public void SetPlayerTurn(bool isMaster)
         {
             _myTurn = isMaster ? Turn.Master : Turn.Client;
-            myTurnText.text = $"自分のターン名:{_myTurn.ToString()}";
             _button.interactable = _currentTurn.Value == _myTurn;
+
+            ActivateTurnText(true);
+            UpdateTurnText();
+        }
+
+        private void UpdateTurnText()
+        {
+            currentTurnText.text = $"{GetPlayerName()}さんのターン";
         }
 
         public bool IsMyTurn => _currentTurn.Value == _myTurn;
+
+        private string GetPlayerName()
+        {
+            return IsMyTurn ? PlayerNameRegister.PlayerName : PhotonNetwork.otherPlayers[0].NickName;
+        }
+
+        public void ActivateTurnText(bool value)
+        {
+            currentTurnText.enabled = value;
+        }
     }
 }
