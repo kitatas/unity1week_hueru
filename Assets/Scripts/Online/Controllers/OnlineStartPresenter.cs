@@ -23,8 +23,8 @@ namespace Online.Controllers
 
         private void DisplayPlayerName()
         {
-            playerName.text = $"あなた:{PlayerNameRegister.PlayerName}さん";
-            enemyName.text = $"対戦相手:{PhotonNetwork.otherPlayers[0].NickName}さん";
+            playerName.text = $"{PlayerNameRegister.PlayerName}さん";
+            enemyName.text = $"{PhotonNetwork.otherPlayers[0].NickName}さん";
         }
 
         private void ShowTurnEndButton()

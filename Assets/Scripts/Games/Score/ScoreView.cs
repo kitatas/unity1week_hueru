@@ -9,7 +9,7 @@ namespace Games.Score
 
         public void UpdateScore(int scoreValue)
         {
-            scoreText.text = $"{scoreValue}";
+            scoreText.text = $"{scoreValue:000}";
         }
     }
 }
