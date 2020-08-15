@@ -8,5 +8,7 @@ namespace Configs
         Explode  = 3,
         Finish   = 4,
         Alert    = 5,
+        Matched  = 6,
+        Appear   = 7,
     }
 }

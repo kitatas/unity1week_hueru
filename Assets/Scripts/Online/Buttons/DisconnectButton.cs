@@ -1,4 +1,5 @@
 using Configs;
+using Games.Buttons;
 using Games.SceneLoaders;
 using UniRx;
 using UnityEngine;
@@ -8,6 +9,7 @@ using Zenject;
 namespace Online.Buttons
 {
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class DisconnectButton : MonoBehaviour
     {
         private SceneLoader _sceneLoader;

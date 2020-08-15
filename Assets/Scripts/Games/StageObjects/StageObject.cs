@@ -1,6 +1,7 @@
 using Configs;
 using DG.Tweening;
 using Games.Controllers;
+using Games.Sounds;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -14,16 +15,20 @@ namespace Games.StageObjects
 
         private readonly float _animationTime = 0.5f;
 
+        private SeController _seController;
         private GameController _gameController;
 
         [Inject]
-        private void Construct(GameController gameController)
+        private void Construct(SeController seController, GameController gameController)
         {
+            _seController = seController;
             _gameController = gameController;
         }
 
         private void Start()
         {
+            _seController.PlaySe(SeType.Generate);
+
             transform
                 .DOScale(transform.localScale * 2f, _animationTime);
 
@@ -31,6 +36,7 @@ namespace Games.StageObjects
                 .Where(other => other.CompareTag(Tag.GAME_OVER_AREA))
                 .Subscribe(_ =>
                 {
+                    _seController.PlaySe(SeType.Explode);
                     Instantiate(effect, transform.position, Quaternion.identity);
                     Destroy(gameObject);
                     _gameController.SetGameOver();

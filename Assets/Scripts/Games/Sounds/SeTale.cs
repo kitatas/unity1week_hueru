@@ -12,6 +12,8 @@ namespace Games.Sounds
         [SerializeField] private AudioClip explode = null;
         [SerializeField] private AudioClip finish = null;
         [SerializeField] private AudioClip alert = null;
+        [SerializeField] private AudioClip matched = null;
+        [SerializeField] private AudioClip appear = null;
 
         public AudioClip[] GetSeList()
         {
@@ -23,6 +25,8 @@ namespace Games.Sounds
             seList[(int) SeType.Explode]  = explode;
             seList[(int) SeType.Finish]   = finish;
             seList[(int) SeType.Alert]    = alert;
+            seList[(int) SeType.Matched]  = matched;
+            seList[(int) SeType.Appear]   = appear;
 
             return seList;
         }

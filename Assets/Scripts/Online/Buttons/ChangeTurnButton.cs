@@ -1,9 +1,11 @@
 using Configs;
 using Games.Players;
+using Games.Sounds;
 using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Online.Buttons
 {
@@ -18,11 +20,14 @@ namespace Online.Buttons
 
         private Button _button;
         private PhotonView _photonView;
+        private SeController _seController;
 
-        private void Awake()
+        [Inject]
+        private void Construct(SeController seController)
         {
             _button = GetComponent<Button>();
             _photonView = GetComponent<PhotonView>();
+            _seController = seController;
 
             ActivateTurnText(false);
             _button.interactable = false;
@@ -54,6 +59,7 @@ namespace Online.Buttons
         [PunRPC]
         private void ChangeTurnRpc()
         {
+            _seController.PlaySe(SeType.Decision);
             _currentTurn.Value = _currentTurn.Value == Turn.Master ? Turn.Client : Turn.Master;
         }
 

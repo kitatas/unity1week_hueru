@@ -3,6 +3,7 @@ using System.Threading;
 using Configs;
 using Cysharp.Threading.Tasks;
 using Games.Controllers;
+using Games.Sounds;
 using Games.StageObjects;
 using Online.Buttons;
 using TMPro;
@@ -24,17 +25,19 @@ namespace Online.Controllers
         private ChangeTurnButton _changeTurnButton;
         private OnlineStartPresenter _onlineStartPresenter;
         private StageObjectRepository _stageObjectRepository;
+        private SeController _seController;
 
         [Inject]
         private void Construct(StartPresenter startPresenter, ChangeTurnButton changeTurnButton,
             OnlineStartPresenter onlineStartPresenter, OnlineEndPresenter onlineEndPresenter,
-            StageObjectRepository stageObjectRepository)
+            StageObjectRepository stageObjectRepository, SeController seController)
         {
             _photonView = GetComponent<PhotonView>();
             _startPresenter = startPresenter;
             _changeTurnButton = changeTurnButton;
             _onlineStartPresenter = onlineStartPresenter;
             _stageObjectRepository = stageObjectRepository;
+            _seController = seController;
 
             _isStart = false;
             _isFinish = new ReactiveProperty<bool>(false);
@@ -47,6 +50,7 @@ namespace Online.Controllers
                     onlineEndPresenter.Play(finishType);
                     _onlineStartPresenter.ShowBackTitleButton();
                     _changeTurnButton.ActivateTurnText(false);
+                    _seController.PlaySe(SeType.Finish);
                 })
                 .AddTo(this);
         }
@@ -63,6 +67,7 @@ namespace Online.Controllers
         [PunRPC]
         private void StartGame()
         {
+            _seController.PlaySe(SeType.Alert);
             matchingText.enabled = false;
             _changeTurnButton.SetPlayerTurn(PhotonNetwork.isMasterClient);
             _startPresenter.Play(() =>
@@ -87,6 +92,7 @@ namespace Online.Controllers
 
             if (_isFinish.Value == false)
             {
+                _seController.PlaySe(SeType.Alert);
                 matchingText.enabled = true;
                 matchingText.text = "通信が切断されました。";
                 _onlineStartPresenter.ShowBackTitleButton();

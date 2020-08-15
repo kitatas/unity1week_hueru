@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading;
+using Configs;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Games.Sounds;
 using UnityEngine;
+using Zenject;
 
 namespace Games.Controllers
 {
@@ -16,6 +19,14 @@ namespace Games.Controllers
         private readonly float _bottomHeight = -5.688f;
         private readonly float _animationTime = 0.5f;
 
+        private SeController _seController;
+
+        [Inject]
+        private void Construct(SeController seController)
+        {
+            _seController = seController;
+        }
+
         public void Play(Action action)
         {
             var token = this.GetCancellationTokenOnDestroy();
@@ -28,6 +39,8 @@ namespace Games.Controllers
                 .DOLocalMoveY(_hitHeight, _animationTime)
                 .SetEase(Ease.Linear)
                 .WithCancellation(token);
+
+            _seController.PlaySe(SeType.Appear);
 
             await (
                 gameStage

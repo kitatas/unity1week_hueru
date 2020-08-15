@@ -1,4 +1,6 @@
 using System;
+using Configs;
+using Games.Sounds;
 using Games.StageObjects;
 using UniRx;
 using UniRx.Triggers;
@@ -18,7 +20,7 @@ namespace Games.Controllers
 
         [Inject]
         private void Construct(StartPresenter startPresenter, EndPresenter endPresenter,
-            StageObjectRepository stageObjectRepository)
+            StageObjectRepository stageObjectRepository, SeController seController)
         {
             _stageObjectRepository = stageObjectRepository;
 
@@ -34,7 +36,11 @@ namespace Games.Controllers
 
             _isGameOver
                 .Where(x => x)
-                .Subscribe(_ => endPresenter.Play())
+                .Subscribe(_ =>
+                {
+                    endPresenter.Play();
+                    seController.PlaySe(SeType.Finish);
+                })
                 .AddTo(this);
         }
 
