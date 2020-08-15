@@ -1,5 +1,4 @@
-using Configs;
-using Games.SceneLoaders;
+using Games.Players;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,23 +8,21 @@ namespace Games.Buttons
 {
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
-    public sealed class LoadButton : MonoBehaviour
+    public sealed class RegisterButton : MonoBehaviour
     {
-        [SerializeField] private SceneName sceneName = default;
-
-        private SceneLoader _sceneLoader;
+        private PlayerNameRegister _playerNameRegister;
 
         [Inject]
-        private void Construct(SceneLoader sceneLoader)
+        private void Construct(PlayerNameRegister playerNameRegister)
         {
-            _sceneLoader = sceneLoader;
+            _playerNameRegister = playerNameRegister;
         }
 
         private void Start()
         {
             GetComponent<Button>()
                 .OnClickAsObservable()
-                .Subscribe(_ => _sceneLoader.Load(sceneName))
+                .Subscribe(_ => _playerNameRegister.UpdatePlayerName())
                 .AddTo(this);
         }
     }

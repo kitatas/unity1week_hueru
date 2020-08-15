@@ -7,6 +7,7 @@ using Zenject;
 namespace Games.Buttons
 {
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class RankingButton : MonoBehaviour
     {
         [SerializeField] private GameObject effect = null;

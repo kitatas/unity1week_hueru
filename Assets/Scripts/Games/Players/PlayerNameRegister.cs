@@ -1,14 +1,12 @@
 using TMPro;
-using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Games.Players
 {
+    [RequireComponent(typeof(TMP_InputField))]
     public sealed class PlayerNameRegister : MonoBehaviour
     {
-        [SerializeField] private TMP_InputField tmpInputField = null;
-        [SerializeField] private Button registerButton = null;
+        private TMP_InputField _playerNameInputField;
 
         private static string _playerName = "";
 
@@ -16,22 +14,17 @@ namespace Games.Players
 
         private void Awake()
         {
+            _playerNameInputField = GetComponent<TMP_InputField>();
+
             if (_playerName != "")
             {
-                tmpInputField.text = _playerName;
+                _playerNameInputField.text = _playerName;
             }
         }
 
-        private void Start()
+        public void UpdatePlayerName()
         {
-            registerButton
-                .OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    // 
-                    _playerName = tmpInputField.text;
-                })
-                .AddTo(this);
+            _playerName = _playerNameInputField.text;
         }
     }
 }
