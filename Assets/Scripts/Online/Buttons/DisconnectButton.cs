@@ -34,6 +34,16 @@ namespace Online.Buttons
 
         private static void Disconnect()
         {
+            if (PhotonNetwork.connected == false)
+            {
+                return;
+            }
+
+            if (PhotonNetwork.room == null)
+            {
+                return;
+            }
+
             if (PhotonNetwork.room.PlayerCount == 1)
             {
                 PhotonNetwork.room.IsOpen = true;
