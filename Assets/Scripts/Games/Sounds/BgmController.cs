@@ -19,6 +19,11 @@ namespace Games.Sounds
         {
             if (_bgmList.TryGetValue((int) bgmType, out var clip))
             {
+                if (AudioSource.clip == clip)
+                {
+                    return;
+                }
+
                 AudioSource.clip = clip;
                 AudioSource.Play();
             }
