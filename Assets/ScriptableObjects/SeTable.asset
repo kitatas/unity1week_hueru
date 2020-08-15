@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c446e6986f1434ca28eb39a03c9eca, type: 3}
+  m_Name: SeTable
+  m_EditorClassIdentifier: 
+  decision: {fileID: 0}
+  cancel: {fileID: 0}
+  generate: {fileID: 0}
+  explode: {fileID: 0}
+  finish: {fileID: 0}
+  alert: {fileID: 0}
