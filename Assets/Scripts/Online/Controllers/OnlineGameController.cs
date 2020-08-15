@@ -67,9 +67,20 @@ namespace Online.Controllers
         [PunRPC]
         private void StartGame()
         {
-            _seController.PlaySe(SeType.Alert);
+            var token = this.GetCancellationTokenOnDestroy();
+            GameStartAsync(token).Forget();
+            CheckDisconnectedAsync(token).Forget();
+        }
+
+        private async UniTaskVoid GameStartAsync(CancellationToken token)
+        {
+            _seController.PlaySe(SeType.Matched);
+            matchingText.text = $"{PhotonNetwork.otherPlayers[0].NickName}さんとマッチングしました。";
+
+            await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
+
             matchingText.enabled = false;
-            _changeTurnButton.SetPlayerTurn(PhotonNetwork.isMasterClient);
+
             _startPresenter.Play(() =>
             {
                 _isStart = true;
@@ -81,9 +92,7 @@ namespace Online.Controllers
             });
 
             _onlineStartPresenter.Play();
-
-            var token = this.GetCancellationTokenOnDestroy();
-            CheckDisconnectedAsync(token).Forget();
+            _changeTurnButton.SetPlayerTurn(PhotonNetwork.isMasterClient);
         }
 
         private async UniTaskVoid CheckDisconnectedAsync(CancellationToken token)
@@ -92,6 +101,7 @@ namespace Online.Controllers
 
             if (_isFinish.Value == false)
             {
+                _isStart = false;
                 _seController.PlaySe(SeType.Alert);
                 matchingText.enabled = true;
                 matchingText.text = "通信が切断されました。";

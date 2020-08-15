@@ -37,9 +37,9 @@ namespace Online.Controllers
             switch (finishType)
             {
                 case FinishType.Win:
-                    return "勝ち";
+                    return "あなたの勝ち";
                 case FinishType.Lose:
-                    return "負け";
+                    return "あなたの負け";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(finishType), finishType, null);
             }
