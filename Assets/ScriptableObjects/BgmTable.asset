@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1928e36b92050445681a521bb5b8a3fd, type: 3}
   m_Name: BgmTable
   m_EditorClassIdentifier: 
-  title: {fileID: 0}
-  main: {fileID: 0}
+  main: {fileID: 8300000, guid: eb04231902d6440bfaa39d17e9a137e1, type: 3}

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c446e6986f1434ca28eb39a03c9eca, type: 3}
   m_Name: SeTable
   m_EditorClassIdentifier: 
-  decision: {fileID: 0}
-  cancel: {fileID: 0}
-  generate: {fileID: 0}
-  explode: {fileID: 0}
-  finish: {fileID: 0}
-  alert: {fileID: 0}
+  decision: {fileID: 8300000, guid: 7274ccd8f751c47249b186de6b0571fe, type: 3}
+  cancel: {fileID: 8300000, guid: 2393e1f7b6101416da6945042dcc51ac, type: 3}
+  generate: {fileID: 8300000, guid: 46ad81e634a5845d69e52e264502aa2d, type: 3}
+  explode: {fileID: 8300000, guid: f2a17400a4cb84a5f8cc6f9ad2e2df6b, type: 3}
+  finish: {fileID: 8300000, guid: d70508ce7b1ab47f08f5e181af88986b, type: 3}
+  alert: {fileID: 8300000, guid: 805a14283c1684fb1b6b53b612022a5a, type: 3}
+  matched: {fileID: 8300000, guid: 6ca5ff44d6eb548b9ae1e606e9c494b1, type: 3}
+  appear: {fileID: 8300000, guid: 9e94ed62752e1411791f4e527d1bcc3f, type: 3}
