@@ -47,7 +47,7 @@ namespace Online.Players
                     {
                         _scoreUpdatable.UpdateScore();
                         _onlineGameController.GenerateStageObject(clickObject.transform.position);
-                        _changeTurnButton.SetCanChange();
+                        _changeTurnButton.UpdateClickCount();
                     }
                 })
                 .AddTo(this);

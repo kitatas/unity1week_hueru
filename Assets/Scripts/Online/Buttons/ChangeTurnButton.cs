@@ -15,6 +15,7 @@ namespace Online.Buttons
     {
         [SerializeField] private TextMeshProUGUI currentTurnText = null;
         private Turn _myTurn;
+        private ReactiveProperty<int> _clickCount;
         private ReactiveProperty<Turn> _currentTurn;
         private ReactiveProperty<bool> _canChange;
 
@@ -37,6 +38,20 @@ namespace Online.Buttons
 
         private void Start()
         {
+            _clickCount = new ReactiveProperty<int>(0);
+
+            // ターン切り替え可能に
+            _clickCount
+                .Where(x => x == 1)
+                .Subscribe(_ => SetCanChange())
+                .AddTo(this);
+
+            // 強制ターン切り替え
+            _clickCount
+                .Where(x => x == 10)
+                .Subscribe(x => DoTurnChange())
+                .AddTo(this);
+
             _currentTurn = new ReactiveProperty<Turn>(Turn.Master);
             _currentTurn
                 .SkipLatestValueOnSubscribe()
@@ -52,8 +67,19 @@ namespace Online.Buttons
             _button
                 .OnClickAsObservable()
                 .Where(_ => IsMyTurn)
-                .Subscribe(_ => _photonView.RPC(nameof(ChangeTurnRpc), PhotonTargets.All))
+                .Subscribe(_ => DoTurnChange())
                 .AddTo(this);
+        }
+
+        public void UpdateClickCount()
+        {
+            _clickCount.Value++;
+        }
+
+        private void DoTurnChange()
+        {
+            _clickCount.Value = 0;
+            _photonView.RPC(nameof(ChangeTurnRpc), PhotonTargets.All);
         }
 
         [PunRPC]
