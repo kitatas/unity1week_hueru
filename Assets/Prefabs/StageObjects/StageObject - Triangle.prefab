@@ -251,7 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5d714af8bf44e7ae0708a291864b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954, type: 3}
+  generateEffect: {fileID: 1000011671376998, guid: 9f3eac537f2944e9081635574e522fc9,
+    type: 3}
+  explodeEffect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954,
+    type: 3}
 --- !u!114 &7565742685374376253
 MonoBehaviour:
   m_ObjectHideFlags: 0

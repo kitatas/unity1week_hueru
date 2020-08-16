@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 79ed31afeea414c10a0a3a1f6b432389, type: 3}
   m_Color: {r: 1, g: 0.7490196, b: 0.5019608, a: 1}
   m_FlipX: 0
@@ -276,7 +276,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5c3f72c8de4b03b5288a195f2efe3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954, type: 3}
+  generateEffect: {fileID: 1000011671376998, guid: 9f3eac537f2944e9081635574e522fc9,
+    type: 3}
+  explodeEffect: {fileID: 1000011671376998, guid: ca00bbd3f99ed4eadaad2ca8e38e0954,
+    type: 3}
 --- !u!1 &2130067820717448907
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +348,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 79ed31afeea414c10a0a3a1f6b432389, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
