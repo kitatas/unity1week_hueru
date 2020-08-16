@@ -15,6 +15,8 @@ namespace Games.Buttons
         public Button Button { get; private set; }
 
         private readonly string _gameId = "huyasu_huyasu";
+        private readonly string _hashTag1 = "unityroom";
+        private readonly string _hashTag2 = "unity1week";
 
         private IScoreModel _scoreModel;
 
@@ -36,7 +38,8 @@ namespace Games.Buttons
                 .OnClickAsObservable()
                 .Subscribe(_ =>
                 {
-                    var tweetText = $"{_scoreModel.GetScore()}個増やすことができた！";
+                    var tweetText = $"{_scoreModel.GetScore()}個増やすことができた！\n";
+                    tweetText += $"#{_hashTag1} #{_hashTag2}\n";
                     UnityRoomTweet.Tweet(_gameId, tweetText);
                 })
                 .AddTo(this);
