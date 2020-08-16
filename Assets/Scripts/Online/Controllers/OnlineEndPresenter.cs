@@ -29,6 +29,7 @@ namespace Online.Controllers
                 .DOShakePosition(_shakeTime, _shakeStrength);
 
             gameFinishText.text = GetFinishText(finishType);
+            gameFinishText.colorGradient = GetTextColorGradient(finishType);
             FadeInText();
         }
 
@@ -43,6 +44,27 @@ namespace Online.Controllers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(finishType), finishType, null);
             }
+        }
+
+        private static VertexGradient GetTextColorGradient(FinishType finishType)
+        {
+            Color topColor;
+            Color bottomColor;
+            switch (finishType)
+            {
+                case FinishType.Win:
+                    topColor = Color.red;
+                    bottomColor = new Color(1.0f, 0.9f, 0.9f);
+                    break;
+                case FinishType.Lose:
+                    topColor = Color.blue;
+                    bottomColor = new Color(0.9f, 0.9f, 1.0f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(finishType), finishType, null);
+            }
+
+            return new VertexGradient(topColor, topColor, bottomColor, bottomColor);
         }
 
         private void FadeInText()
