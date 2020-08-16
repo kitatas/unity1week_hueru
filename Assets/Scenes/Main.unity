@@ -1775,8 +1775,7 @@ MonoBehaviour:
   m_text: "\u30B2\u30FC\u30E0\u30AA\u30FC\u30D0\u30FC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a3901ead59e74fb18c3721795087c57, type: 2}
-  m_sharedMaterial: {fileID: -6445869669449564108, guid: 0a3901ead59e74fb18c3721795087c57,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a6d1d19fe63b54d598b87a60f5857330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

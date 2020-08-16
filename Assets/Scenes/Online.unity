@@ -994,8 +994,7 @@ MonoBehaviour:
   m_text: "???\u3055\u3093\u306E\u30BF\u30FC\u30F3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a3901ead59e74fb18c3721795087c57, type: 2}
-  m_sharedMaterial: {fileID: -6445869669449564108, guid: 0a3901ead59e74fb18c3721795087c57,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a6d1d19fe63b54d598b87a60f5857330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1342,7 +1341,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 337, y: -60}
-  m_SizeDelta: {x: 285, y: 50}
+  m_SizeDelta: {x: 285, y: 50.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1006464043
 MonoBehaviour:
@@ -1394,7 +1393,7 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1408,7 +1407,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1792,8 +1791,7 @@ MonoBehaviour:
   m_text: "\u30B2\u30FC\u30E0\u30AA\u30FC\u30D0\u30FC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a3901ead59e74fb18c3721795087c57, type: 2}
-  m_sharedMaterial: {fileID: -6445869669449564108, guid: 0a3901ead59e74fb18c3721795087c57,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a6d1d19fe63b54d598b87a60f5857330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1904,10 +1902,10 @@ RectTransform:
   m_Father: {fileID: 444501041}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 250}
-  m_SizeDelta: {x: 800, y: 50}
+  m_SizeDelta: {x: -100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1391540089
 GameObject:
@@ -3020,8 +3018,7 @@ MonoBehaviour:
   m_text: "\u30DE\u30C3\u30C1\u30F3\u30B0\u4E2D..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a3901ead59e74fb18c3721795087c57, type: 2}
-  m_sharedMaterial: {fileID: -6445869669449564108, guid: 0a3901ead59e74fb18c3721795087c57,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a6d1d19fe63b54d598b87a60f5857330, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
