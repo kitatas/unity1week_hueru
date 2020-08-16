@@ -14,6 +14,7 @@ namespace Online.Controllers
         [SerializeField] private TextMeshProUGUI enemyName = null;
 
         private readonly float _animationTime = 0.25f;
+        private readonly float _buttonHeight = 75f;
 
         public void Play()
         {
@@ -31,10 +32,10 @@ namespace Online.Controllers
         {
             DOTween.Sequence()
                 .Append(backTitleButton
-                    .DOAnchorPosY(-backTitleButton.anchoredPosition.y, _animationTime)
+                    .DOAnchorPosY(_buttonHeight * -1, _animationTime)
                     .SetEase(Ease.Linear))
                 .Append(turnEndButton
-                    .DOAnchorPosY(-turnEndButton.anchoredPosition.y, _animationTime)
+                    .DOAnchorPosY(_buttonHeight, _animationTime)
                     .SetEase(Ease.Linear));
         }
 
@@ -42,10 +43,10 @@ namespace Online.Controllers
         {
             DOTween.Sequence()
                 .Append(turnEndButton
-                    .DOAnchorPosY(-turnEndButton.anchoredPosition.y, _animationTime)
+                    .DOAnchorPosY(_buttonHeight * -1, _animationTime)
                     .SetEase(Ease.Linear))
                 .Append(backTitleButton
-                    .DOAnchorPosY(-backTitleButton.anchoredPosition.y, _animationTime)
+                    .DOAnchorPosY(_buttonHeight, _animationTime)
                     .SetEase(Ease.Linear));
         }
     }
