@@ -59,5 +59,10 @@ namespace Online.Controllers
         {
             return PhotonNetwork.room.PlayerCount == 2;
         }
+
+        public static string GetEnemyName()
+        {
+            return PhotonNetwork.otherPlayers[0].NickName;
+        }
     }
 }

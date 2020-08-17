@@ -67,14 +67,14 @@ namespace Online.Controllers
         private void StartGameRpc()
         {
             var token = this.GetCancellationTokenOnDestroy();
-            GameStartAsync(token).Forget();
+            StartGameAsync(token).Forget();
             CheckDisconnectedAsync(token).Forget();
         }
 
-        private async UniTaskVoid GameStartAsync(CancellationToken token)
+        private async UniTaskVoid StartGameAsync(CancellationToken token)
         {
             _seController.PlaySe(SeType.Matched);
-            matchingText.text = $"{PhotonNetwork.otherPlayers[0].NickName}さんとマッチングしました。";
+            matchingText.text = $"{MatchingController.GetEnemyName()}さんとマッチングしました。";
 
             await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
 

@@ -108,7 +108,7 @@ namespace Online.Controllers
 
         private string GetPlayerName()
         {
-            return IsPlayerTurn ? PlayerNameRegister.PlayerName : PhotonNetwork.otherPlayers[0].NickName;
+            return IsPlayerTurn ? PlayerNameRegister.PlayerName : MatchingController.GetEnemyName();
         }
 
         public void InitializeTurn()

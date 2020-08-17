@@ -25,7 +25,7 @@ namespace Online.Controllers
         private void DisplayPlayerName()
         {
             playerName.text = $"{PlayerNameRegister.PlayerName}さん";
-            enemyName.text = $"{PhotonNetwork.otherPlayers[0].NickName}さん";
+            enemyName.text = $"{MatchingController.GetEnemyName()}さん";
         }
 
         private void ShowTurnEndButton()
