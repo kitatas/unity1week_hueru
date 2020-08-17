@@ -3,6 +3,7 @@ using Configs;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 namespace Online.Controllers
@@ -13,7 +14,6 @@ namespace Online.Controllers
 
         private readonly float _shakeTime = 0.75f;
         private readonly float _shakeStrength = 0.75f;
-        private readonly float _fadeInValue = 1.0f;
 
         private Camera _mainCamera;
 
@@ -30,7 +30,7 @@ namespace Online.Controllers
 
             gameFinishText.text = GetFinishText(finishType);
             gameFinishText.colorGradient = GetTextColorGradient(finishType);
-            FadeInText();
+            gameFinishText.FadeInText();
         }
 
         private static string GetFinishText(FinishType finishType)
@@ -65,30 +65,6 @@ namespace Online.Controllers
             }
 
             return new VertexGradient(topColor, topColor, bottomColor, bottomColor);
-        }
-
-        private void FadeInText()
-        {
-            var offsetAddValue = new Vector3(0f, 30f, 0f);
-            var tmpAnimator = new DOTweenTMPAnimator(gameFinishText);
-            gameFinishText
-                .DOFade(0f, 0f);
-
-            for (int i = 0; i < tmpAnimator.textInfo.characterCount; i++)
-            {
-                tmpAnimator.DOScaleChar(i, 0.7f, 0f);
-                var offset = tmpAnimator.GetCharOffset(i);
-                DOTween.Sequence()
-                    .Append(tmpAnimator
-                        .DOOffsetChar(i, offset + offsetAddValue, 0.4f)
-                        .SetEase(Ease.OutFlash, 2f))
-                    .Join(tmpAnimator
-                        .DOFadeChar(i, _fadeInValue, 0.4f))
-                    .Join(tmpAnimator
-                        .DOScaleChar(i, _fadeInValue, 0.4f)
-                        .SetEase(Ease.OutBack))
-                    .SetDelay(0.07f * i);
-            }
         }
     }
 }

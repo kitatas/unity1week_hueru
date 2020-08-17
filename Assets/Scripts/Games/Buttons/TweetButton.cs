@@ -2,6 +2,7 @@ using Games.Score;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 using Zenject;
 
 namespace Games.Buttons
@@ -12,29 +13,25 @@ namespace Games.Buttons
     {
         [SerializeField] private GameObject effect = null;
 
-        public Button Button { get; private set; }
-
         private readonly string _gameId = "huyasu_huyasu";
         private readonly string _hashTag1 = "unityroom";
         private readonly string _hashTag2 = "unity1week";
 
+        private Button _button;
         private IScoreModel _scoreModel;
 
         [Inject]
         private void Construct(IScoreModel scoreModel)
         {
+            _button = GetComponent<Button>();
             _scoreModel = scoreModel;
-        }
 
-        private void Awake()
-        {
-            Button = GetComponent<Button>();
-            Button.enabled = false;
+            _button.enabled = false;
         }
 
         private void Start()
         {
-            Button
+            _button
                 .OnClickAsObservable()
                 .Subscribe(_ =>
                 {
@@ -45,8 +42,10 @@ namespace Games.Buttons
                 .AddTo(this);
         }
 
-        public void PlayEffect()
+        public void PlayFadeIn()
         {
+            _button.FadeInButton();
+
             var position = new Vector3(-0.85f, 1.4f, 0f);
             Instantiate(effect, position, Quaternion.identity);
         }
