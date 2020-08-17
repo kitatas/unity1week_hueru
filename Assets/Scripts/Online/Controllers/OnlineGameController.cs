@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Games.Controllers;
 using Games.Sounds;
 using Games.StageObjects;
-using Online.Buttons;
 using TMPro;
 using UniRx;
 using UniRx.Triggers;
@@ -22,19 +21,19 @@ namespace Online.Controllers
 
         private PhotonView _photonView;
         private StartPresenter _startPresenter;
-        private ChangeTurnButton _changeTurnButton;
+        private TurnChanger _turnChanger;
         private OnlineStartPresenter _onlineStartPresenter;
         private StageObjectRepository _stageObjectRepository;
         private SeController _seController;
 
         [Inject]
-        private void Construct(StartPresenter startPresenter, ChangeTurnButton changeTurnButton,
+        private void Construct(StartPresenter startPresenter, TurnChanger turnChanger,
             OnlineStartPresenter onlineStartPresenter, OnlineEndPresenter onlineEndPresenter,
             StageObjectRepository stageObjectRepository, SeController seController)
         {
             _photonView = GetComponent<PhotonView>();
             _startPresenter = startPresenter;
-            _changeTurnButton = changeTurnButton;
+            _turnChanger = turnChanger;
             _onlineStartPresenter = onlineStartPresenter;
             _stageObjectRepository = stageObjectRepository;
             _seController = seController;
@@ -46,10 +45,10 @@ namespace Online.Controllers
                 .Subscribe(_ =>
                 {
                     // 終了演出
-                    var finishType = _changeTurnButton.IsMyTurn ? FinishType.Lose : FinishType.Win;
+                    var finishType = _turnChanger.IsPlayerTurn ? FinishType.Lose : FinishType.Win;
                     onlineEndPresenter.Play(finishType);
                     _onlineStartPresenter.ShowBackTitleButton();
-                    _changeTurnButton.ActivateTurnText(false);
+                    _turnChanger.ActivateTurnText(false);
                     _seController.PlaySe(SeType.Finish);
                 })
                 .AddTo(this);
@@ -92,7 +91,7 @@ namespace Online.Controllers
             });
 
             _onlineStartPresenter.Play();
-            _changeTurnButton.SetPlayerTurn(PhotonNetwork.isMasterClient);
+            _turnChanger.InitializeTurn();
         }
 
         private async UniTaskVoid CheckDisconnectedAsync(CancellationToken token)

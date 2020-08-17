@@ -1,7 +1,6 @@
 using Configs;
 using Games.Players;
 using Games.Score;
-using Online.Buttons;
 using Online.Controllers;
 using UniRx;
 using UnityEngine;
@@ -15,25 +14,25 @@ namespace Online.Players
         private PlayerRaycaster _playerRaycaster;
         private IScoreUpdatable _scoreUpdatable;
         private OnlineGameController _onlineGameController;
-        private ChangeTurnButton _changeTurnButton;
+        private TurnChanger _turnChanger;
 
         [Inject]
         private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
             IScoreUpdatable scoreUpdatable, OnlineGameController onlineGameController,
-            ChangeTurnButton changeTurnButton)
+            TurnChanger turnChanger)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
             _scoreUpdatable = scoreUpdatable;
             _onlineGameController = onlineGameController;
-            _changeTurnButton = changeTurnButton;
+            _turnChanger = turnChanger;
         }
 
         private void Start()
         {
             // オブジェクトのクリック
             _onlineGameController.PlayingAsObservable
-                .Where(_ => _changeTurnButton.IsMyTurn)
+                .Where(_ => _turnChanger.IsPlayerTurn)
                 .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>
                 {
@@ -47,7 +46,7 @@ namespace Online.Players
                     {
                         _scoreUpdatable.UpdateScore();
                         _onlineGameController.GenerateStageObject(clickObject.transform.position);
-                        _changeTurnButton.UpdateClickCount();
+                        _turnChanger.IncreaseClickCount();
                     }
                 })
                 .AddTo(this);
