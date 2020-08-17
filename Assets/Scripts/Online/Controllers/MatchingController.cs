@@ -51,7 +51,7 @@ namespace Online.Controllers
             if (IsMaxPlayer())
             {
                 PhotonNetwork.room.IsOpen = false;
-                _onlineGameController.SetStartGame();
+                _onlineGameController.StartGame();
             }
         }
 

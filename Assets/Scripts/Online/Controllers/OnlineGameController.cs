@@ -58,13 +58,13 @@ namespace Online.Controllers
             this.UpdateAsObservable()
                 .Where(_ => _isStart && _isFinish.Value == false);
 
-        public void SetStartGame()
+        public void StartGame()
         {
-            _photonView.RPC(nameof(StartGame), PhotonTargets.All);
+            _photonView.RPC(nameof(StartGameRpc), PhotonTargets.All);
         }
 
         [PunRPC]
-        private void StartGame()
+        private void StartGameRpc()
         {
             var token = this.GetCancellationTokenOnDestroy();
             GameStartAsync(token).Forget();
