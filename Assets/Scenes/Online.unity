@@ -2385,6 +2385,7 @@ GameObject:
   - component: {fileID: 1893492663}
   - component: {fileID: 1893492656}
   - component: {fileID: 1893492661}
+  - component: {fileID: 1893492664}
   - component: {fileID: 1893492660}
   m_Layer: 0
   m_Name: GameController
@@ -2479,6 +2480,7 @@ MonoBehaviour:
   - {fileID: 1893492657}
   - {fileID: 1893492663}
   - {fileID: 1893492662}
+  - {fileID: 1893492664}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 1913456002}
@@ -2523,6 +2525,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameFinishText: {fileID: 1277333515}
+--- !u!114 &1893492664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893492655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0569bdbd1c8544d89ad246817e622e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnChangeButton: {fileID: 4803353243240664871}
+  currentTurnText: {fileID: 905201655}
 --- !u!1 &1913456001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1913456003}
   - component: {fileID: 1913456002}
+  - component: {fileID: 1913456004}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2554,6 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 1913456004}
   - {fileID: 1723116273}
   _installerPrefabs: []
   _autoRun: 1
@@ -2586,6 +2604,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913456004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913456001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356e88fde94a34888a9cbdcdb5edb5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2073243172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3293,49 +3323,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7210f2e0fd49af85240e1e5c82da4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTurnText: {fileID: 905201655}
---- !u!114 &4803353243240664869
+--- !u!114 &4803353243240664871 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4803353243553030621, guid: d4a80fcddd1824de9845f90164eefe37,
+    type: 3}
+  m_PrefabInstance: {fileID: 4803353243240664866}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4803353243240664867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 4803353243240664868}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
---- !u!114 &4803353243240664870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4803353243240664867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 2
-  instantiationId: 2
-  currentMasterID: -1
-  isRuntimeInstantiated: 0
