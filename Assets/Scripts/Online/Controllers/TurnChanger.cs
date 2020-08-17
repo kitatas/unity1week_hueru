@@ -1,6 +1,9 @@
+using System.Threading;
 using Configs;
+using Cysharp.Threading.Tasks;
 using Games.Players;
 using Games.Sounds;
+using Online.StageObjects;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -19,17 +22,23 @@ namespace Online.Controllers
         private ReactiveProperty<Turn> _currentTurn;
         private ReactiveProperty<int> _clickCount;
         private ReactiveProperty<bool> _canChange;
+        private bool _isWait;
 
         private PhotonView _photonView;
+        private CancellationToken _token;
         private SeController _seController;
+        private StageObjectContainer _stageObjectContainer;
 
         [Inject]
-        private void Construct(SeController seController)
+        private void Construct(SeController seController, StageObjectContainer stageObjectContainer)
         {
             _photonView = GetComponent<PhotonView>();
+            _token = this.GetCancellationTokenOnDestroy();
             _seController = seController;
+            _stageObjectContainer = stageObjectContainer;
 
             _myTurn = Turn.None;
+            _isWait = false;
             ActivateTurnText(false);
         }
 
@@ -67,6 +76,16 @@ namespace Online.Controllers
         public void ChangeTurn()
         {
             _clickCount.Value = 0;
+            _canChange.Value = false;
+            _isWait = true;
+
+            ChangeTurnAsync().Forget();
+        }
+
+        private async UniTaskVoid ChangeTurnAsync()
+        {
+            await UniTask.WaitUntil(_stageObjectContainer.IsAllSleep, PlayerLoopTiming.FixedUpdate, _token);
+
             _photonView.RPC(nameof(ChangeTurnRpc), PhotonTargets.All);
         }
 
@@ -80,10 +99,12 @@ namespace Online.Controllers
         private void StartTurn()
         {
             currentTurnText.text = $"{GetPlayerName()}さんのターン";
-            _canChange.Value = false;
+            _isWait = false;
         }
 
         public bool IsPlayerTurn => _currentTurn.Value == _myTurn;
+
+        public bool IsPlay => IsPlayerTurn && _isWait == false;
 
         private string GetPlayerName()
         {

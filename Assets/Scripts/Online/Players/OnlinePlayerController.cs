@@ -32,7 +32,7 @@ namespace Online.Players
         {
             // オブジェクトのクリック
             _onlineGameController.PlayingAsObservable
-                .Where(_ => _turnChanger.IsPlayerTurn)
+                .Where(_ => _turnChanger.IsPlay)
                 .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>
                 {

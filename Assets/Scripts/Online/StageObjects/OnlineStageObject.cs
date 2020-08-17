@@ -20,10 +20,13 @@ namespace Online.StageObjects
         private OnlineGameController _onlineGameController;
 
         [Inject]
-        private void Construct(SeController seController, OnlineGameController onlineGameController)
+        private void Construct(SeController seController, OnlineGameController onlineGameController,
+            StageObjectContainer stageObjectContainer)
         {
             _seController = seController;
             _onlineGameController = onlineGameController;
+
+            stageObjectContainer.AddStageObject(gameObject);
         }
 
         private void Start()
