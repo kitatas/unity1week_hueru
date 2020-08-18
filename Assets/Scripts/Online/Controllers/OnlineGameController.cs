@@ -17,6 +17,7 @@ namespace Online.Controllers
     {
         [SerializeField] private TextMeshProUGUI matchingText = null;
         private bool _isStart;
+        private ReactiveProperty<bool> _isDisconnected;
         private ReactiveProperty<bool> _isFinish;
 
         private PhotonView _photonView;
@@ -39,6 +40,13 @@ namespace Online.Controllers
             _seController = seController;
 
             _isStart = false;
+
+            _isDisconnected = new ReactiveProperty<bool>(false);
+            _isDisconnected
+                .Where(x => x)
+                .Subscribe(_ => _onlineStartPresenter.ShowBackTitleButton())
+                .AddTo(this);
+
             _isFinish = new ReactiveProperty<bool>(false);
             _isFinish
                 .Where(x => x)
@@ -47,7 +55,7 @@ namespace Online.Controllers
                     // 終了演出
                     var finishType = _turnChanger.IsPlayerTurn ? FinishType.Lose : FinishType.Win;
                     onlineEndPresenter.Play(finishType);
-                    _onlineStartPresenter.ShowBackTitleButton();
+                    _isDisconnected.Value = true;
                     _turnChanger.ActivateTurnText(false);
                     _seController.PlaySe(SeType.Finish);
                 })
@@ -56,7 +64,7 @@ namespace Online.Controllers
 
         public IObservable<Unit> PlayingAsObservable =>
             this.UpdateAsObservable()
-                .Where(_ => _isStart && _isFinish.Value == false);
+                .Where(_ => _isStart && _isDisconnected.Value == false && _isFinish.Value == false);
 
         public void StartGame()
         {
@@ -78,33 +86,42 @@ namespace Online.Controllers
 
             await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
 
+            if (_isDisconnected.Value)
+            {
+                return;
+            }
+
             matchingText.enabled = false;
+            _onlineStartPresenter.Play();
 
             _startPresenter.Play(() =>
             {
+                if (_isDisconnected.Value)
+                {
+                    return;
+                }
+
                 _isStart = true;
+                _turnChanger.InitializeTurn();
 
                 if (PhotonNetwork.isMasterClient)
                 {
                     GenerateStageObject(Vector3.zero);
                 }
             });
-
-            _onlineStartPresenter.Play();
-            _turnChanger.InitializeTurn();
         }
 
         private async UniTaskVoid CheckDisconnectedAsync(CancellationToken token)
         {
             await UniTask.WaitUntil(() => PhotonNetwork.room.PlayerCount != 2, cancellationToken: token);
 
+            _isDisconnected.Value = true;
+
             if (_isFinish.Value == false)
             {
-                _isStart = false;
                 _seController.PlaySe(SeType.Alert);
                 matchingText.enabled = true;
                 matchingText.text = "通信が切断されました。";
-                _onlineStartPresenter.ShowBackTitleButton();
             }
         }
 
