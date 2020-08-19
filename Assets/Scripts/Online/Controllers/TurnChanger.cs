@@ -110,7 +110,7 @@ namespace Online.Controllers
 
         private string GetPlayerName()
         {
-            return IsPlayerTurn ? PlayerNameRegister.PlayerName : MatchingController.GetEnemyName();
+            return IsPlayerTurn ? PlayerNameRegister.PlayerName : MatchingController.EnemyName;
         }
 
         public void InitializeTurn()

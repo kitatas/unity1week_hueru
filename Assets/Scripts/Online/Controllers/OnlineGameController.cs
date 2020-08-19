@@ -82,7 +82,7 @@ namespace Online.Controllers
         private async UniTaskVoid StartGameAsync(CancellationToken token)
         {
             _seController.PlaySe(SeType.Matched);
-            matchingText.text = $"{MatchingController.GetEnemyName()}さんとマッチングしました。";
+            matchingText.text = $"{MatchingController.EnemyName}さんとマッチングしました。";
 
             await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
 
