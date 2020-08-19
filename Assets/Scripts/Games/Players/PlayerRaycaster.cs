@@ -18,7 +18,7 @@ namespace Games.Players
         /// <returns></returns>
         public GameObject GetClickObject(Vector3 inputPosition)
         {
-            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = _mainCamera.ScreenPointToRay(inputPosition);
             var hit = Physics2D.Raycast(ray.origin, ray.direction);
             return hit == false ? null : hit.collider.gameObject;
         }
