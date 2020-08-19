@@ -26,7 +26,7 @@ namespace Online.StageObjects
             _seController = seController;
             _onlineGameController = onlineGameController;
 
-            stageObjectContainer.AddStageObject(gameObject);
+            stageObjectContainer.AddStageObject(this);
         }
 
         private void Start()

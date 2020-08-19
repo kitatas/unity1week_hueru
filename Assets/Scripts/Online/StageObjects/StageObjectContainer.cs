@@ -12,7 +12,7 @@ namespace Online.StageObjects
             _stageObjectList = new List<Rigidbody2D>();
         }
 
-        public void AddStageObject(GameObject stageObject)
+        public void AddStageObject(OnlineStageObject stageObject)
         {
             var rb = stageObject.GetComponent<Rigidbody2D>();
             _stageObjectList.Add(rb);
