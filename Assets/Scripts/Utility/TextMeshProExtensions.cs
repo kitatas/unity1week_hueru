@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utility
 {
-    public static class TmpExtensions
+    public static class TextMeshProExtensions
     {
         public static void FadeInText(this TextMeshProUGUI textMeshProUGUI)
         {
