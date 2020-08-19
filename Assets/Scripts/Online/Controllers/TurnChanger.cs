@@ -84,6 +84,8 @@ namespace Online.Controllers
 
         private async UniTaskVoid ChangeTurnAsync()
         {
+            currentTurnText.text = $"判定中...";
+
             await UniTask.WaitUntil(_stageObjectContainer.IsAllSleep, PlayerLoopTiming.FixedUpdate, _token);
 
             _photonView.RPC(nameof(ChangeTurnRpc), PhotonTargets.All);
