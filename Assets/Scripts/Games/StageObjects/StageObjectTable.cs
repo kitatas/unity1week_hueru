@@ -9,16 +9,11 @@ namespace Games.StageObjects
         [SerializeField] private GameObject triangle = null;
         [SerializeField] private GameObject square = null;
 
-        private GameObject[] StageObjectList => new GameObject[]
+        public GameObject[] StageObjectList => new GameObject[]
         {
             circle,
             triangle,
             square,
         };
-
-        public GameObject GetStageObject()
-        {
-            return StageObjectList[Random.Range(0, StageObjectList.Length)];
-        }
     }
 }

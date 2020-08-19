@@ -7,23 +7,28 @@ namespace Games.StageObjects
     {
         private readonly float _radius = 0.125f;
 
-        private StageObjectTable _stageObjectTable;
+        private GameObject[] _stageObjectList;
 
         [Inject]
         private void Construct(StageObjectTable stageObjectTable)
         {
-            _stageObjectTable = stageObjectTable;
+            _stageObjectList = stageObjectTable.StageObjectList;
         }
 
         public void GenerateStageObject(Vector3 clickObjectPosition)
         {
-            var stageObject = Instantiate(_stageObjectTable.GetStageObject(), transform);
+            var stageObject = Instantiate(GetStageObject(), transform);
             stageObject.transform.position = GetGeneratePosition(clickObjectPosition);
         }
 
         public string GetGenerateStageObjectName()
         {
-            return _stageObjectTable.GetStageObject().name;
+            return GetStageObject().name;
+        }
+
+        private GameObject GetStageObject()
+        {
+            return _stageObjectList[Random.Range(0, _stageObjectList.Length)];
         }
 
         /// <summary>
