@@ -4,6 +4,7 @@ using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 namespace Games.Buttons
 {
@@ -13,8 +14,6 @@ namespace Games.Buttons
     {
         [SerializeField] private CanvasGroup canvasGroup = null;
         [SerializeField] private PopType popType = default;
-
-        private readonly float _animationTime = 0.25f;
 
         private void Start()
         {
@@ -29,46 +28,14 @@ namespace Games.Buttons
             switch (popType)
             {
                 case PopType.Open:
-                    Open();
+                    canvasGroup.PopUpOpen();
                     break;
                 case PopType.Close:
-                    Close();
+                    canvasGroup.PopUpClose();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private void Open()
-        {
-            canvasGroup.blocksRaycasts = true;
-
-            DOTween.Sequence()
-                .Append(DOTween
-                    .To(() => canvasGroup.alpha,
-                        alpha => canvasGroup.alpha = alpha,
-                        1f,
-                        _animationTime)
-                    .SetEase(Ease.OutBack))
-                .Join((canvasGroup.transform as RectTransform)
-                    .DOScale(Vector3.one, _animationTime)
-                    .SetEase(Ease.OutBack));
-        }
-
-        private void Close()
-        {
-            canvasGroup.blocksRaycasts = false;
-
-            DOTween.Sequence()
-                .Append(DOTween
-                    .To(() => canvasGroup.alpha,
-                        alpha => canvasGroup.alpha = alpha,
-                        0f,
-                        _animationTime)
-                    .SetEase(Ease.OutQuart))
-                .Join((canvasGroup.transform as RectTransform)
-                    .DOScale(Vector3.one * 0.8f, _animationTime)
-                    .SetEase(Ease.OutQuart));
         }
     }
 }
