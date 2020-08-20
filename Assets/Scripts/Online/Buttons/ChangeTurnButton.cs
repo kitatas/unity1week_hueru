@@ -1,3 +1,4 @@
+using Games.Buttons;
 using Online.Controllers;
 using UniRx;
 using UnityEngine;
@@ -7,6 +8,7 @@ using Zenject;
 namespace Online.Buttons
 {
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class ChangeTurnButton : MonoBehaviour
     {
         private TurnChanger _turnChanger;
