@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// ランキングシーンを読み込むボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class RankingButton : MonoBehaviour
@@ -35,6 +38,9 @@ namespace Games.Buttons
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// ボタン表示時の演出
+        /// </summary>
         public void PlayFadeIn()
         {
             _button.FadeInButton();

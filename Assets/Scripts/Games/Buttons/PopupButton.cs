@@ -1,6 +1,5 @@
 using System;
 using Configs;
-using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +7,9 @@ using Utility;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// UIのポップアップを行うボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class PopupButton : MonoBehaviour
@@ -23,6 +25,10 @@ namespace Games.Buttons
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// PopTypeから該当するCanvasのアニメーションを行う。
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void TweenWindow()
         {
             switch (popType)

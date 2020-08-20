@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Online.Buttons
 {
+    /// <summary>
+    /// ターン切り替えボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class ChangeTurnButton : MonoBehaviour

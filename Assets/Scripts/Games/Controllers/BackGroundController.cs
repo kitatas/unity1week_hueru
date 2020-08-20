@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Games.Controllers
 {
+    /// <summary>
+    /// 背景スクロールを行うクラス
+    /// </summary>
     [RequireComponent(typeof(Canvas))]
     public sealed class BackGroundController : MonoBehaviour
     {
@@ -16,11 +19,13 @@ namespace Games.Controllers
         {
             var canvas = GetComponent<Canvas>();
 
+            // シーン遷移後にCamera取得
             this.UpdateAsObservable()
                 .Where(_ => canvas.worldCamera == null)
                 .Subscribe(_ => canvas.worldCamera = FindObjectOfType<Camera>())
                 .AddTo(this);
 
+            // 背景スクロール
             this.UpdateAsObservable()
                 .Subscribe(_ =>
                 {

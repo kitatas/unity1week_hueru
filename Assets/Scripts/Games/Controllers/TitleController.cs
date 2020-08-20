@@ -10,6 +10,9 @@ using Zenject;
 
 namespace Games.Controllers
 {
+    /// <summary>
+    /// タイトル画面を制御するクラス
+    /// </summary>
     public sealed class TitleController : MonoBehaviour
     {
         [SerializeField] private RectTransform[] titleStrings = null;
@@ -21,6 +24,7 @@ namespace Games.Controllers
         {
             bgmController.PlayBgm(BgmType.Main);
 
+            // タイトル文字のアニメーション
             var token = this.GetCancellationTokenOnDestroy();
             foreach (var titleString in titleStrings)
             {
@@ -31,6 +35,12 @@ namespace Games.Controllers
             }
         }
 
+        /// <summary>
+        /// 1文字のアニメーション
+        /// </summary>
+        /// <param name="titleString"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         private async UniTaskVoid TweenStringAsync(RectTransform titleString, CancellationToken token)
         {
             var animationTime = Random.Range(0.5f, 1f);

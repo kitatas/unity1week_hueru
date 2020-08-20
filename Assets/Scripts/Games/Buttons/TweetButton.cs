@@ -7,15 +7,18 @@ using Zenject;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// TweetするWindowを開くボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class TweetButton : MonoBehaviour
     {
         [SerializeField] private GameObject effect = null;
 
-        private readonly string _gameId = "huyasu_huyasu";
-        private readonly string _hashTag1 = "unityroom";
-        private readonly string _hashTag2 = "unity1week";
+        private const string GAME_ID = "huyasu_huyasu";
+        private const string HASH_TAG1 = "unityroom";
+        private const string HASH_TAG2 = "unity1week";
 
         private Button _button;
         private IScoreModel _scoreModel;
@@ -36,12 +39,15 @@ namespace Games.Buttons
                 .Subscribe(_ =>
                 {
                     var tweetText = $"{_scoreModel.GetScore()}個増やすことができた！\n";
-                    tweetText += $"#{_hashTag1} #{_hashTag2}\n";
-                    UnityRoomTweet.Tweet(_gameId, tweetText);
+                    tweetText += $"#{HASH_TAG1} #{HASH_TAG2}\n";
+                    UnityRoomTweet.Tweet(GAME_ID, tweetText);
                 })
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// ボタン表示時の演出
+        /// </summary>
         public void PlayFadeIn()
         {
             _button.FadeInButton();

@@ -9,6 +9,9 @@ using Zenject;
 
 namespace Games.Controllers
 {
+    /// <summary>
+    /// ゲーム開始演出を行うクラス
+    /// </summary>
     public sealed class StartPresenter : MonoBehaviour
     {
         [SerializeField] private Transform gameStage = null;
@@ -27,12 +30,22 @@ namespace Games.Controllers
             _seController = seController;
         }
 
+        /// <summary>
+        /// ゲーム開始演出の再生
+        /// </summary>
+        /// <param name="action"></param>
         public void Play(Action action)
         {
             var token = this.GetCancellationTokenOnDestroy();
             PlayAsync(token, action).Forget();
         }
 
+        /// <summary>
+        /// ステージ出現のアニメーション
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         private async UniTaskVoid PlayAsync(CancellationToken token, Action action)
         {
             await gameStage

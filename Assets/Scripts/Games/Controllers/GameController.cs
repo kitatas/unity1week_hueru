@@ -9,6 +9,9 @@ using Zenject;
 
 namespace Games.Controllers
 {
+    /// <summary>
+    /// ゲームの進行を管理するクラス
+    /// </summary>
     public sealed class GameController : MonoBehaviour
     {
         [SerializeField] private bool isFinishDebug = false;
@@ -27,6 +30,7 @@ namespace Games.Controllers
             _isStart = false;
             _isGameOver = new ReactiveProperty<bool>(false);
 
+            // ゲーム開始演出の実行
             startPresenter.Play(() =>
             {
                 _isStart = true;
@@ -34,6 +38,7 @@ namespace Games.Controllers
                 GenerateStageObject(position);
             });
 
+            // ゲームオーバー演出の実行
             _isGameOver
                 .Where(x => x)
                 .Subscribe(_ =>
@@ -44,15 +49,25 @@ namespace Games.Controllers
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// Play可能時のUpdateAsObservable
+        /// </summary>
         public IObservable<Unit> PlayingAsObservable =>
             this.UpdateAsObservable()
                 .Where(_ => _isStart && _isGameOver.Value == false);
 
+        /// <summary>
+        /// ゲーム終了に
+        /// </summary>
         public void SetGameOver()
         {
             _isGameOver.Value = true;
         }
 
+        /// <summary>
+        /// StageObjectの生成
+        /// </summary>
+        /// <param name="generatePosition"></param>
         public void GenerateStageObject(Vector3 generatePosition)
         {
             _stageObjectRepository.GenerateStageObject(generatePosition);

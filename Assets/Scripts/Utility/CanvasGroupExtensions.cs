@@ -3,10 +3,17 @@ using UnityEngine;
 
 namespace Utility
 {
+    /// <summary>
+    /// CanvasGroupの拡張メソッドを管理するうクラス
+    /// </summary>
     public static class CanvasGroupExtensions
     {
         private static readonly float _animationTime = 0.25f;
 
+        /// <summary>
+        /// フェードイン
+        /// </summary>
+        /// <param name="canvasGroup"></param>
         public static void PopUpOpen(this CanvasGroup canvasGroup)
         {
             canvasGroup.blocksRaycasts = true;
@@ -23,6 +30,10 @@ namespace Utility
                     .SetEase(Ease.OutBack));
         }
 
+        /// <summary>
+        /// フェードアウト
+        /// </summary>
+        /// <param name="canvasGroup"></param>
         public static void PopUpClose(this CanvasGroup canvasGroup)
         {
             canvasGroup.blocksRaycasts = false;

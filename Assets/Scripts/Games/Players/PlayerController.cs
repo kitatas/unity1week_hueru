@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Games.Players
 {
+    /// <summary>
+    /// Player制御のクラス
+    /// </summary>
     public sealed class PlayerController : MonoBehaviour
     {
         private IPlayerInput _playerInput;
@@ -26,7 +29,7 @@ namespace Games.Players
 
         private void Start()
         {
-            // オブジェクトのクリック
+            // StageObjectのクリック
             _gameController.PlayingAsObservable
                 .Where(_ => _playerInput.InputMouseButton)
                 .Subscribe(_ =>

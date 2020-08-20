@@ -4,8 +4,15 @@ using UnityEngine;
 
 namespace Utility
 {
+    /// <summary>
+    /// TextMeshProの拡張メソッドを管理するうクラス
+    /// </summary>
     public static class TextMeshProExtensions
     {
+        /// <summary>
+        /// フェードイン
+        /// </summary>
+        /// <param name="textMeshProUGUI"></param>
         public static void FadeInText(this TextMeshProUGUI textMeshProUGUI)
         {
             var offsetAddValue = new Vector3(0f, 30f, 0f);

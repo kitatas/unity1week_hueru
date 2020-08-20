@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Games.Players
 {
+    /// <summary>
+    /// Playerの操作によるRayを管理するクラス
+    /// </summary>
     public sealed class PlayerRaycaster
     {
         private readonly Camera _mainCamera;
@@ -12,7 +15,7 @@ namespace Games.Players
         }
 
         /// <summary>
-        /// 
+        /// マウス位置からGameObjectの取得
         /// </summary>
         /// <param name="inputPosition"></param>
         /// <returns></returns>

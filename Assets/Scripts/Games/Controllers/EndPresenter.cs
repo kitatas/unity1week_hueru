@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Games.Controllers
 {
+    /// <summary>
+    /// ゲーム終了演出を行うクラス
+    /// </summary>
     public sealed class EndPresenter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI gameOverText = null;
@@ -26,6 +29,9 @@ namespace Games.Controllers
             _rankingButton = rankingButton;
         }
 
+        /// <summary>
+        /// ゲーム終了演出の再生
+        /// </summary>
         public void Play()
         {
             _mainCamera

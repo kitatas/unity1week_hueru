@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Games.Players
 {
+    /// <summary>
+    /// Player名の登録管理クラス
+    /// </summary>
     [RequireComponent(typeof(TMP_InputField))]
     public sealed class PlayerNameRegister : MonoBehaviour
     {
@@ -22,6 +25,9 @@ namespace Games.Players
             }
         }
 
+        /// <summary>
+        /// Player名の更新
+        /// </summary>
         public void UpdatePlayerName()
         {
             _playerName = _playerNameInputField.text;

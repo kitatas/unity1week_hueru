@@ -5,6 +5,9 @@ using Zenject;
 
 namespace Games.Sounds
 {
+    /// <summary>
+    /// BGMの制御クラス
+    /// </summary>
     public sealed class BgmController : BaseAudioSource
     {
         private AudioClip[] _bgmList;
@@ -15,6 +18,10 @@ namespace Games.Sounds
             _bgmList = bgmTable.GetBgmList();
         }
 
+        /// <summary>
+        /// BGMの再生
+        /// </summary>
+        /// <param name="bgmType"></param>
         public void PlayBgm(BgmType bgmType)
         {
             if (_bgmList.TryGetValue((int) bgmType, out var clip))
@@ -33,6 +40,9 @@ namespace Games.Sounds
             }
         }
 
+        /// <summary>
+        ///  BGMの停止
+        /// </summary>
         public void StopBgm()
         {
             AudioSource.Stop();

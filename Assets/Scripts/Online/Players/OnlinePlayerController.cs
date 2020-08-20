@@ -8,6 +8,10 @@ using Zenject;
 
 namespace Online.Players
 {
+    /// <summary>
+    /// PUN用
+    /// Player制御のクラス
+    /// </summary>
     public sealed class OnlinePlayerController : MonoBehaviour
     {
         private IPlayerInput _playerInput;
@@ -30,7 +34,7 @@ namespace Online.Players
 
         private void Start()
         {
-            // オブジェクトのクリック
+            // StageObjectのクリック
             _onlineGameController.PlayingAsObservable
                 .Where(_ => _turnChanger.IsPlay)
                 .Where(_ => _playerInput.InputMouseButton)

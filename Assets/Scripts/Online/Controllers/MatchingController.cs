@@ -5,6 +5,9 @@ using Zenject;
 
 namespace Online.Controllers
 {
+    /// <summary>
+    /// マッチング制御のクラス
+    /// </summary>
     public sealed class MatchingController : MonoBehaviour
     {
         private OnlineGameController _onlineGameController;
@@ -43,11 +46,13 @@ namespace Online.Controllers
             PhotonNetwork.CreateRoom(roomName, roomOptions, null);
         }
 
+        /// <summary>
+        /// room入室時に呼ばれる
+        /// </summary>
         private void OnJoinedRoom()
         {
             PhotonNetwork.player.NickName = PlayerNameRegister.PlayerName;
 
-            // room 内のプレイヤー人数が2人
             if (IsMaxPlayer())
             {
                 PhotonNetwork.room.IsOpen = false;
@@ -55,11 +60,18 @@ namespace Online.Controllers
             }
         }
 
+        /// <summary>
+        /// room 内のプレイヤー人数が2人
+        /// </summary>
+        /// <returns></returns>
         private static bool IsMaxPlayer()
         {
             return PhotonNetwork.room.PlayerCount == 2;
         }
 
+        /// <summary>
+        /// 対戦相手名
+        /// </summary>
         public static string EnemyName => PhotonNetwork.otherPlayers[0].NickName;
     }
 }

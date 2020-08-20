@@ -8,6 +8,10 @@ using Zenject;
 
 namespace Online.Controllers
 {
+    /// <summary>
+    /// PUN版
+    /// ゲーム終了演出を行うクラス
+    /// </summary>
     public sealed class OnlineEndPresenter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI gameFinishText = null;
@@ -23,6 +27,10 @@ namespace Online.Controllers
             _mainCamera = mainCamera;
         }
 
+        /// <summary>
+        /// ゲーム終了演出の再生
+        /// </summary>
+        /// <param name="finishType"></param>
         public void Play(FinishType finishType)
         {
             _mainCamera
@@ -33,6 +41,12 @@ namespace Online.Controllers
             gameFinishText.FadeInText();
         }
 
+        /// <summary>
+        /// 勝敗の文言取得
+        /// </summary>
+        /// <param name="finishType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private static string GetFinishText(FinishType finishType)
         {
             switch (finishType)
@@ -46,6 +60,12 @@ namespace Online.Controllers
             }
         }
 
+        /// <summary>
+        /// 勝敗文言の色取得
+        /// </summary>
+        /// <param name="finishType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private static VertexGradient GetTextColorGradient(FinishType finishType)
         {
             Color topColor;

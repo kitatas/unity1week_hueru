@@ -9,6 +9,10 @@ using Zenject;
 
 namespace Online.StageObjects
 {
+    /// <summary>
+    /// PUN用
+    /// ふやすオブジェクト制御クラス
+    /// </summary>
     public sealed class OnlineStageObject : MonoBehaviour
     {
         [SerializeField] private GameObject generateEffect = null;

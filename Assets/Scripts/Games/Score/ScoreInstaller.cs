@@ -2,6 +2,9 @@ using Zenject;
 
 namespace Games.Score
 {
+    /// <summary>
+    /// SceneContextに紐づいているMonoInstaller
+    /// </summary>
     public sealed class ScoreInstaller : MonoInstaller
     {
         public override void InstallBindings()

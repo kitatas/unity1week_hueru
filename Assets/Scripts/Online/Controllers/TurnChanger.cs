@@ -12,6 +12,9 @@ using Zenject;
 
 namespace Online.Controllers
 {
+    /// <summary>
+    /// ターン切り替えを制御するクラス
+    /// </summary>
     [RequireComponent(typeof(PhotonView))]
     public sealed class TurnChanger : MonoBehaviour
     {
@@ -44,6 +47,7 @@ namespace Online.Controllers
 
         private void Start()
         {
+            // 1ターンでふやした数
             _clickCount = new ReactiveProperty<int>(0);
 
             _clickCount
@@ -56,23 +60,31 @@ namespace Online.Controllers
                 .Subscribe(_ => ChangeTurn())
                 .AddTo(this);
 
+            // ターンが切り替わった時
             _currentTurn = new ReactiveProperty<Turn>(Turn.Master);
             _currentTurn
                 .SkipLatestValueOnSubscribe()
                 .Subscribe(_ => StartTurn())
                 .AddTo(this);
 
+            // ターン終了ボタンの有効 / 無効化
             _canChange = new ReactiveProperty<bool>(false);
             _canChange
                 .Subscribe(x => turnChangeButton.interactable = x)
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// 1ふやした数の増加
+        /// </summary>
         public void IncreaseClickCount()
         {
             _clickCount.Value++;
         }
 
+        /// <summary>
+        /// ターン切り替え準備
+        /// </summary>
         public void ChangeTurn()
         {
             _clickCount.Value = 0;
@@ -82,6 +94,10 @@ namespace Online.Controllers
             ChangeTurnAsync().Forget();
         }
 
+        /// <summary>
+        /// 静止判定後、ターン切り替え
+        /// </summary>
+        /// <returns></returns>
         private async UniTaskVoid ChangeTurnAsync()
         {
             currentTurnText.text = $"判定中...";
@@ -91,6 +107,9 @@ namespace Online.Controllers
             _photonView.RPC(nameof(ChangeTurnRpc), PhotonTargets.All);
         }
 
+        /// <summary>
+        /// ターン切り替え
+        /// </summary>
         [PunRPC]
         private void ChangeTurnRpc()
         {
@@ -98,21 +117,37 @@ namespace Online.Controllers
             _currentTurn.Value = _currentTurn.Value == Turn.Master ? Turn.Client : Turn.Master;
         }
 
+        /// <summary>
+        /// ターン開始
+        /// </summary>
         private void StartTurn()
         {
             currentTurnText.text = $"{GetPlayerName()}さんのターン";
             _isWait = false;
         }
 
+        /// <summary>
+        /// 自分のターンであるかの判定
+        /// </summary>
         public bool IsPlayerTurn => _currentTurn.Value == _myTurn;
 
+        /// <summary>
+        /// ふやせる状態であるか
+        /// </summary>
         public bool IsPlay => IsPlayerTurn && _isWait == false;
 
+        /// <summary>
+        /// ターンのプレイヤー名を取得
+        /// </summary>
+        /// <returns></returns>
         private string GetPlayerName()
         {
             return IsPlayerTurn ? PlayerNameRegister.PlayerName : MatchingController.EnemyName;
         }
 
+        /// <summary>
+        /// ゲーム開始時のターン初期化
+        /// </summary>
         public void InitializeTurn()
         {
             _myTurn = PhotonNetwork.isMasterClient ? Turn.Master : Turn.Client;
@@ -120,6 +155,10 @@ namespace Online.Controllers
             StartTurn();
         }
 
+        /// <summary>
+        /// ターンTextの有効 / 無効化
+        /// </summary>
+        /// <param name="value"></param>
         public void ActivateTurnText(bool value)
         {
             currentTurnText.enabled = value;

@@ -8,6 +8,9 @@ using Zenject;
 
 namespace Online.Buttons
 {
+    /// <summary>
+    /// 通信切断ボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class DisconnectButton : MonoBehaviour
@@ -32,6 +35,9 @@ namespace Online.Buttons
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// 通信の切断
+        /// </summary>
         private static void Disconnect()
         {
             if (PhotonNetwork.connected == false)

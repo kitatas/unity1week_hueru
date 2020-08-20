@@ -5,6 +5,9 @@ using Zenject;
 
 namespace Games.Sounds
 {
+    /// <summary>
+    /// SEの制御クラス
+    /// </summary>
     public sealed class SeController : BaseAudioSource
     {
         private AudioClip[] _seList;
@@ -15,6 +18,10 @@ namespace Games.Sounds
             _seList = seTale.GetSeList();
         }
 
+        /// <summary>
+        /// SEの再生
+        /// </summary>
+        /// <param name="seType"></param>
         public void PlaySe(SeType seType)
         {
             if (_seList.TryGetValue((int) seType, out var clip))

@@ -5,6 +5,9 @@ using Zenject;
 
 namespace Games.Installers
 {
+    /// <summary>
+    /// ProjectContextに紐づいているScriptableObjectInstaller
+    /// </summary>
     [CreateAssetMenu(fileName = "MainTableInstaller", menuName = "Installers/MainTableInstaller")]
     public sealed class MainTableInstaller : ScriptableObjectInstaller<MainTableInstaller>
     {

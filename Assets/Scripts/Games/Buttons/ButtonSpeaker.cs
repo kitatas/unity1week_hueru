@@ -8,6 +8,9 @@ using Zenject;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// ボタン押下時に音を再生
+    /// </summary>
     public sealed class ButtonSpeaker : MonoBehaviour
     {
         [SerializeField] private ButtonType buttonType = default;
@@ -28,6 +31,11 @@ namespace Games.Buttons
                 .AddTo(this);
         }
 
+        /// <summary>
+        /// ButtonTypeからSeTypeを取得
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private SeType GetSeType()
         {
             switch (buttonType)

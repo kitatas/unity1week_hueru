@@ -7,6 +7,9 @@ using Zenject;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// シーン遷移を行うボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class LoadButton : MonoBehaviour

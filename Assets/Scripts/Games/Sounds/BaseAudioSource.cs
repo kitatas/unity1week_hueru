@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Games.Sounds
 {
+    /// <summary>
+    /// 音制御の抽象クラス
+    /// </summary>
     [RequireComponent(typeof(AudioSource))]
     public abstract class BaseAudioSource : MonoBehaviour, IVolumeUpdatable
     {
@@ -20,8 +23,16 @@ namespace Games.Sounds
             }
         }
 
+        /// <summary>
+        /// 音量の取得
+        /// </summary>
+        /// <returns></returns>
         public float GetVolume() => AudioSource.volume;
 
+        /// <summary>
+        /// 音量の代入
+        /// </summary>
+        /// <param name="value"></param>
         public void SetVolume(float value) => AudioSource.volume = value;
     }
 }

@@ -9,6 +9,9 @@ using Zenject;
 
 namespace Games.StageObjects
 {
+    /// <summary>
+    /// ふやすオブジェクト制御クラス
+    /// </summary>
     public sealed class StageObject : MonoBehaviour
     {
         [SerializeField] private GameObject generateEffect = null;

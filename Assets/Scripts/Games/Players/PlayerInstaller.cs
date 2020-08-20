@@ -3,6 +3,9 @@ using Zenject;
 
 namespace Games.Players
 {
+    /// <summary>
+    /// GameObjectContextに紐づいているMonoInstaller
+    /// </summary>
     public sealed class PlayerInstaller : MonoInstaller
     {
         public override void InstallBindings()

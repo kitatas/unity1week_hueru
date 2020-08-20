@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Games.Sounds
 {
+    /// <summary>
+    /// SEのScriptableObject
+    /// </summary>
     [CreateAssetMenu(fileName = "SeTable", menuName = "DataTable/SeTable")]
     public sealed class SeTale : ScriptableObject
     {
@@ -15,6 +18,10 @@ namespace Games.Sounds
         [SerializeField] private AudioClip matched = null;
         [SerializeField] private AudioClip appear = null;
 
+        /// <summary>
+        /// 音ファイルとSeTypeの紐付け
+        /// </summary>
+        /// <returns></returns>
         public AudioClip[] GetSeList()
         {
             var seCount = System.Enum.GetValues(typeof(SeType)).Length;

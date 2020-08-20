@@ -6,6 +6,9 @@ using Zenject;
 
 namespace Games.Buttons
 {
+    /// <summary>
+    /// 名前登録を行うボタン
+    /// </summary>
     [RequireComponent(typeof(Button))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class RegisterButton : MonoBehaviour
