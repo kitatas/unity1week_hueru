@@ -30,12 +30,16 @@ namespace Games.StageObjects
 
         /// <summary>
         /// PUN用
-        /// ふやすオブジェクトの名前取得
+        /// ふやすオブジェクトの生成
         /// </summary>
-        /// <returns></returns>
-        public string GetGenerateStageObjectName()
+        /// <param name="clickObjectPosition"></param>
+        public void GenerateOnlineStageObject(Vector3 clickObjectPosition)
         {
-            return GetStageObject().name;
+            PhotonNetwork.Instantiate(
+                GetStageObject().name,
+                GetGeneratePosition(clickObjectPosition),
+                Quaternion.identity,
+                0);
         }
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace Games.StageObjects
         /// </summary>
         /// <param name="clickObjectPosition"></param>
         /// <returns></returns>
-        public Vector3 GetGeneratePosition(Vector3 clickObjectPosition)
+        private Vector3 GetGeneratePosition(Vector3 clickObjectPosition)
         {
             var random = Random.Range(0f, 360f);
             var theta = random * Mathf.PI / 180f;

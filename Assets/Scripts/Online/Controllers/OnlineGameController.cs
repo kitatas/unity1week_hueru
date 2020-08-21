@@ -156,11 +156,7 @@ namespace Online.Controllers
         /// <param name="generatePosition"></param>
         public void GenerateStageObject(Vector3 generatePosition)
         {
-            PhotonNetwork.Instantiate(
-                _stageObjectRepository.GetGenerateStageObjectName(),
-                _stageObjectRepository.GetGeneratePosition(generatePosition),
-                Quaternion.identity,
-                0);
+            _stageObjectRepository.GenerateOnlineStageObject(generatePosition);
         }
 
         /// <summary>
