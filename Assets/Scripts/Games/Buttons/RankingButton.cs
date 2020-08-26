@@ -17,13 +17,15 @@ namespace Games.Buttons
         [SerializeField] private GameObject effect = null;
 
         private Button _button;
+        private Camera _mainCamera;
         private IScoreModel _scoreModel;
         private RankingLoader _rankingLoader;
 
         [Inject]
-        private void Construct(IScoreModel scoreModel)
+        private void Construct(Camera mainCamera, IScoreModel scoreModel)
         {
             _button = GetComponent<Button>();
+            _mainCamera = mainCamera;
             _scoreModel = scoreModel;
             _rankingLoader = RankingLoader.Instance;
 
@@ -45,7 +47,7 @@ namespace Games.Buttons
         {
             _button.FadeInButton();
 
-            var position = new Vector3(0.85f, 1.4f, 0f);
+            var position = _button.image.rectTransform.GetWorldPosition(_mainCamera);
             Instantiate(effect, position, Quaternion.identity);
         }
     }

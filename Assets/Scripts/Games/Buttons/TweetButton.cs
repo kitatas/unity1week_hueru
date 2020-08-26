@@ -21,12 +21,14 @@ namespace Games.Buttons
         private const string HASH_TAG2 = "unity1week";
 
         private Button _button;
+        private Camera _mainCamera;
         private IScoreModel _scoreModel;
 
         [Inject]
-        private void Construct(IScoreModel scoreModel)
+        private void Construct(Camera mainCamera, IScoreModel scoreModel)
         {
             _button = GetComponent<Button>();
+            _mainCamera = mainCamera;
             _scoreModel = scoreModel;
 
             _button.enabled = false;
@@ -52,7 +54,7 @@ namespace Games.Buttons
         {
             _button.FadeInButton();
 
-            var position = new Vector3(-0.85f, 1.4f, 0f);
+            var position = _button.image.rectTransform.GetWorldPosition(_mainCamera);
             Instantiate(effect, position, Quaternion.identity);
         }
     }
