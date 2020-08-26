@@ -575,9 +575,9 @@ GameObject:
   - component: {fileID: 432285577}
   - component: {fileID: 432285576}
   - component: {fileID: 432285575}
+  - component: {fileID: 432285573}
   - component: {fileID: 432285578}
   - component: {fileID: 432285574}
-  - component: {fileID: 432285573}
   m_Layer: 5
   m_Name: Button - Ranking
   m_TagString: Untagged
@@ -613,15 +613,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 432285571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: daed2512e6944d8aaa650ce68076b4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 432285574}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
+  effect: {fileID: 1000011671376998, guid: 31aeec98bde60425ab98645559432e2d, type: 3}
 --- !u!114 &432285574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f068ee506b5241519ee6d2d4f7a709b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1000011671376998, guid: 31aeec98bde60425ab98645559432e2d, type: 3}
 --- !u!114 &432285575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,9 +1214,9 @@ GameObject:
   - component: {fileID: 941566671}
   - component: {fileID: 941566670}
   - component: {fileID: 941566669}
+  - component: {fileID: 941566667}
   - component: {fileID: 941566672}
   - component: {fileID: 941566668}
-  - component: {fileID: 941566667}
   m_Layer: 0
   m_Name: Button - Tweet
   m_TagString: Untagged
@@ -1258,15 +1252,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 941566665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Script: {fileID: 11500000, guid: daed2512e6944d8aaa650ce68076b4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _components:
-  - {fileID: 941566668}
-  _identifier: 
-  _useSceneContext: 0
-  _context: {fileID: 0}
-  _bindType: 0
+  effect: {fileID: 1000011671376998, guid: 4c0e4888eae024f60b00492027ad4aa3, type: 3}
 --- !u!114 &941566668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,7 +1268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06f2538d6794c928cd78c32702f6f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 1000011671376998, guid: 4c0e4888eae024f60b00492027ad4aa3, type: 3}
 --- !u!114 &941566669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2545,6 +2533,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 1277333515}
+  tweetButton: {fileID: 941566667}
+  rankingButton: {fileID: 432285573}
 --- !u!1 &1913456001
 GameObject:
   m_ObjectHideFlags: 0
