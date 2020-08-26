@@ -13,20 +13,18 @@ namespace Games.Controllers
     public sealed class EndPresenter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI gameOverText = null;
+        [SerializeField] private ButtonFader tweetButton = null;
+        [SerializeField] private ButtonFader rankingButton = null;
 
         private readonly float _shakeTime = 0.75f;
         private readonly float _shakeStrength = 0.75f;
 
         private Camera _mainCamera;
-        private TweetButton _tweetButton;
-        private RankingButton _rankingButton;
 
         [Inject]
-        private void Construct(Camera mainCamera, TweetButton tweetButton, RankingButton rankingButton)
+        private void Construct(Camera mainCamera)
         {
             _mainCamera = mainCamera;
-            _tweetButton = tweetButton;
-            _rankingButton = rankingButton;
         }
 
         /// <summary>
@@ -38,8 +36,8 @@ namespace Games.Controllers
                 .DOShakePosition(_shakeTime, _shakeStrength);
 
             gameOverText.FadeInText();
-            _tweetButton.PlayFadeIn();
-            _rankingButton.PlayFadeIn();
+            tweetButton.PlayFadeIn();
+            rankingButton.PlayFadeIn();
         }
     }
 }

@@ -2,7 +2,6 @@ using Games.Score;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
-using Utility;
 using Zenject;
 
 namespace Games.Buttons
@@ -11,27 +10,22 @@ namespace Games.Buttons
     /// TweetするWindowを開くボタン
     /// </summary>
     [RequireComponent(typeof(Button))]
+    [RequireComponent(typeof(ButtonFader))]
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class TweetButton : MonoBehaviour
     {
-        [SerializeField] private GameObject effect = null;
-
         private const string GAME_ID = "huyasu_huyasu";
         private const string HASH_TAG1 = "unityroom";
         private const string HASH_TAG2 = "unity1week";
 
         private Button _button;
-        private Camera _mainCamera;
         private IScoreModel _scoreModel;
 
         [Inject]
-        private void Construct(Camera mainCamera, IScoreModel scoreModel)
+        private void Construct(IScoreModel scoreModel)
         {
             _button = GetComponent<Button>();
-            _mainCamera = mainCamera;
             _scoreModel = scoreModel;
-
-            _button.enabled = false;
         }
 
         private void Start()
@@ -45,17 +39,6 @@ namespace Games.Buttons
                     UnityRoomTweet.Tweet(GAME_ID, tweetText);
                 })
                 .AddTo(this);
-        }
-
-        /// <summary>
-        /// ボタン表示時の演出
-        /// </summary>
-        public void PlayFadeIn()
-        {
-            _button.FadeInButton();
-
-            var position = _button.image.rectTransform.GetWorldPosition(_mainCamera);
-            Instantiate(effect, position, Quaternion.identity);
         }
     }
 }
