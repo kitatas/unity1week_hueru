@@ -1,6 +1,7 @@
 using Configs;
 using Games.Controllers;
 using Games.Score;
+using Games.StageObjects;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -16,15 +17,17 @@ namespace Games.Players
         private PlayerRaycaster _playerRaycaster;
         private IScoreUpdatable _scoreUpdatable;
         private GameController _gameController;
+        private StageObjectRepository _stageObjectRepository;
 
         [Inject]
         private void Construct(IPlayerInput playerInput, PlayerRaycaster playerRaycaster,
-            IScoreUpdatable scoreUpdatable, GameController gameController)
+            IScoreUpdatable scoreUpdatable, GameController gameController, StageObjectRepository stageObjectRepository)
         {
             _playerInput = playerInput;
             _playerRaycaster = playerRaycaster;
             _scoreUpdatable = scoreUpdatable;
             _gameController = gameController;
+            _stageObjectRepository = stageObjectRepository;
         }
 
         private void Start()
@@ -43,7 +46,7 @@ namespace Games.Players
                     if (clickObject.CompareTag(Tag.STAGE_OBJECT))
                     {
                         _scoreUpdatable.UpdateScore();
-                        _gameController.GenerateStageObject(clickObject.transform.position);
+                        _stageObjectRepository.GenerateStageObject(clickObject.transform.position);
                     }
                 })
                 .AddTo(this);

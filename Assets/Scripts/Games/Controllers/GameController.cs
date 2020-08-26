@@ -15,18 +15,15 @@ namespace Games.Controllers
     public sealed class GameController : MonoBehaviour
     {
         [SerializeField] private bool isFinishDebug = false;
+        private readonly Vector3 _debugPosition = new Vector3(2.5f, 1.5f);
 
         private bool _isStart;
         private ReactiveProperty<bool> _isGameOver;
-
-        private StageObjectRepository _stageObjectRepository;
 
         [Inject]
         private void Construct(StartPresenter startPresenter, EndPresenter endPresenter,
             StageObjectRepository stageObjectRepository, SeController seController)
         {
-            _stageObjectRepository = stageObjectRepository;
-
             _isStart = false;
             _isGameOver = new ReactiveProperty<bool>(false);
 
@@ -34,8 +31,8 @@ namespace Games.Controllers
             startPresenter.Play(() =>
             {
                 _isStart = true;
-                var position = isFinishDebug ? new Vector3(2.5f, 1.5f) : Vector3.zero;
-                GenerateStageObject(position);
+                var position = isFinishDebug ? _debugPosition : Vector3.zero;
+                stageObjectRepository.GenerateStageObject(position);
             });
 
             // ゲームオーバー演出の実行
@@ -62,15 +59,6 @@ namespace Games.Controllers
         public void SetGameOver()
         {
             _isGameOver.Value = true;
-        }
-
-        /// <summary>
-        /// StageObjectの生成
-        /// </summary>
-        /// <param name="generatePosition"></param>
-        public void GenerateStageObject(Vector3 generatePosition)
-        {
-            _stageObjectRepository.GenerateStageObject(generatePosition);
         }
     }
 }

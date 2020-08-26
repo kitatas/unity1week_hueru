@@ -126,7 +126,7 @@ namespace Online.Controllers
 
                 if (PhotonNetwork.isMasterClient)
                 {
-                    GenerateStageObject(Vector3.zero);
+                    _stageObjectRepository.GenerateOnlineStageObject(Vector3.zero);
                 }
             });
         }
@@ -148,15 +148,6 @@ namespace Online.Controllers
                 matchingText.enabled = true;
                 matchingText.text = "通信が切断されました。";
             }
-        }
-
-        /// <summary>
-        /// ふえるオブジェクトの生成
-        /// </summary>
-        /// <param name="generatePosition"></param>
-        public void GenerateStageObject(Vector3 generatePosition)
-        {
-            _stageObjectRepository.GenerateOnlineStageObject(generatePosition);
         }
 
         /// <summary>
