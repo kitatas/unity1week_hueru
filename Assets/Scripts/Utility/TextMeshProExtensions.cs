@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Utility
 {
     /// <summary>
-    /// TextMeshProの拡張メソッドを管理するうクラス
+    /// TextMeshProの拡張メソッドを管理するクラス
     /// </summary>
     public static class TextMeshProExtensions
     {

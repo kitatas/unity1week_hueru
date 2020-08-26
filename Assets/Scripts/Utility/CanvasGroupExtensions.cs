@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Utility
 {
     /// <summary>
-    /// CanvasGroupの拡張メソッドを管理するうクラス
+    /// CanvasGroupの拡張メソッドを管理するクラス
     /// </summary>
     public static class CanvasGroupExtensions
     {

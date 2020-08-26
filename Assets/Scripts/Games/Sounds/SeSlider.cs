@@ -19,7 +19,7 @@ namespace Games.Sounds
         }
 
         /// <summary>
-        /// SliderのHandleを話したときに効果音を鳴らすように
+        /// SliderのHandleを離した時に効果音を再生
         /// </summary>
         /// <param name="eventData"></param>
         public override void OnPointerUp(PointerEventData eventData)

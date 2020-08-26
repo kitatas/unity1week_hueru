@@ -1,7 +1,7 @@
 namespace Utility
 {
     /// <summary>
-    /// 配列の拡張メソッドを管理するうクラス
+    /// 配列の拡張メソッドを管理するクラス
     /// </summary>
     public static class ArrayExtensions
     {

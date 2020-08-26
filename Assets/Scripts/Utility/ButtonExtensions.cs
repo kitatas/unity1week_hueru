@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Utility
 {
     /// <summary>
-    /// ボタンの拡張メソッドを管理するうクラス
+    /// ボタンの拡張メソッドを管理するクラス
     /// </summary>
     public static class ButtonExtensions
     {
