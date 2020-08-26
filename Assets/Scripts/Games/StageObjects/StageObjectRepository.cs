@@ -8,7 +8,7 @@ namespace Games.StageObjects
     /// </summary>
     public sealed class StageObjectRepository : MonoBehaviour
     {
-        private readonly float _radius = 0.125f;
+        private readonly float _radius = 0.15f;
 
         private GameObject[] _stageObjectList;
 

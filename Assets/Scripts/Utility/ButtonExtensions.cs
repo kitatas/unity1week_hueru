@@ -9,7 +9,7 @@ namespace Utility
     /// </summary>
     public static class ButtonExtensions
     {
-        private static readonly float _animationTime = 0.5f;
+        private static readonly float _animationTime = 0.25f;
 
         /// <summary>
         /// フェードイン
