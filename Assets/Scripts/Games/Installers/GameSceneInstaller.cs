@@ -1,12 +1,18 @@
 using Games.Controllers;
 using Zenject;
 
-public sealed class GameSceneInstaller : MonoInstaller
+namespace Games.Installers
 {
-    public override void InstallBindings()
+    /// <summary>
+    /// SceneContextに紐づいているMonoInstaller
+    /// </summary>
+    public sealed class GameSceneInstaller : MonoInstaller
     {
-        Container
-            .Bind<CameraController>()
-            .AsCached();
+        public override void InstallBindings()
+        {
+            Container
+                .Bind<CameraController>()
+                .AsCached();
+        }
     }
 }
