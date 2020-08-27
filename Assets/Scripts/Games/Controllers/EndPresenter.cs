@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Games.Buttons;
 using TMPro;
 using UnityEngine;
@@ -16,15 +15,12 @@ namespace Games.Controllers
         [SerializeField] private ButtonFader tweetButton = null;
         [SerializeField] private ButtonFader rankingButton = null;
 
-        private readonly float _shakeTime = 0.75f;
-        private readonly float _shakeStrength = 0.75f;
-
-        private Camera _mainCamera;
+        private CameraController _cameraController;
 
         [Inject]
-        private void Construct(Camera mainCamera)
+        private void Construct(CameraController cameraController)
         {
-            _mainCamera = mainCamera;
+            _cameraController = cameraController;
         }
 
         /// <summary>
@@ -32,8 +28,7 @@ namespace Games.Controllers
         /// </summary>
         public void Play()
         {
-            _mainCamera
-                .DOShakePosition(_shakeTime, _shakeStrength);
+            _cameraController.Shake();
 
             gameOverText.FadeInText();
             tweetButton.PlayFadeIn();

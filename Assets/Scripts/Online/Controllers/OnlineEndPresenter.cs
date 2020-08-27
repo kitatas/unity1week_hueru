@@ -1,6 +1,6 @@
 using System;
 using Configs;
-using DG.Tweening;
+using Games.Controllers;
 using TMPro;
 using UnityEngine;
 using Utility;
@@ -16,15 +16,12 @@ namespace Online.Controllers
     {
         [SerializeField] private TextMeshProUGUI gameFinishText = null;
 
-        private readonly float _shakeTime = 0.75f;
-        private readonly float _shakeStrength = 0.75f;
-
-        private Camera _mainCamera;
+        private CameraController _cameraController;
 
         [Inject]
-        private void Construct(Camera mainCamera)
+        private void Construct(CameraController cameraController)
         {
-            _mainCamera = mainCamera;
+            _cameraController = cameraController;
         }
 
         /// <summary>
@@ -33,8 +30,7 @@ namespace Online.Controllers
         /// <param name="finishType"></param>
         public void Play(FinishType finishType)
         {
-            _mainCamera
-                .DOShakePosition(_shakeTime, _shakeStrength);
+            _cameraController.Shake();
 
             gameFinishText.text = GetFinishText(finishType);
             gameFinishText.colorGradient = GetTextColorGradient(finishType);
