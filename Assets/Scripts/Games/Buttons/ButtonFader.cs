@@ -1,3 +1,4 @@
+using Games.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -16,10 +17,10 @@ namespace Games.Buttons
         private Camera _mainCamera;
 
         [Inject]
-        private void Construct(Camera mainCamera)
+        private void Construct(CameraController cameraController)
         {
             _button = GetComponent<Button>();
-            _mainCamera = mainCamera;
+            _mainCamera = cameraController.MainCamera;
 
             _button.enabled = false;
         }
