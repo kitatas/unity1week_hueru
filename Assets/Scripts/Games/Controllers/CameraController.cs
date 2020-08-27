@@ -17,6 +17,8 @@ namespace Games.Controllers
             _mainCamera = mainCamera;
         }
 
+        public Camera MainCamera => _mainCamera;
+
         public void Shake()
         {
             _mainCamera

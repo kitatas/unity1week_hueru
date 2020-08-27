@@ -1,3 +1,4 @@
+using Games.Controllers;
 using UnityEngine;
 
 namespace Games.Players
@@ -9,9 +10,9 @@ namespace Games.Players
     {
         private readonly Camera _mainCamera;
 
-        public PlayerRaycaster(Camera mainCamera)
+        public PlayerRaycaster(CameraController cameraController)
         {
-            _mainCamera = mainCamera;
+            _mainCamera = cameraController.MainCamera;
         }
 
         /// <summary>
