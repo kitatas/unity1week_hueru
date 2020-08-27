@@ -2550,6 +2550,7 @@ GameObject:
   - component: {fileID: 1913456003}
   - component: {fileID: 1913456002}
   - component: {fileID: 1913456004}
+  - component: {fileID: 1913456005}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -2573,6 +2574,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1913456004}
   - {fileID: 1723116273}
+  - {fileID: 1913456005}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2614,6 +2616,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 356e88fde94a34888a9cbdcdb5edb5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1913456005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913456001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6931c161ee2543a6a50f9ba478aea94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2073243172
@@ -3302,8 +3316,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button - TurnEnd
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2811088046802093067, guid: d4a80fcddd1824de9845f90164eefe37, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a80fcddd1824de9845f90164eefe37, type: 3}
 --- !u!1 &4803353243240664867 stripped
 GameObject:
