@@ -14,21 +14,19 @@ namespace Games.Buttons
     [RequireComponent(typeof(ButtonSpeaker))]
     public sealed class RankingButton : MonoBehaviour
     {
-        private Button _button;
         private IScoreModel _scoreModel;
         private RankingLoader _rankingLoader;
 
         [Inject]
         private void Construct(IScoreModel scoreModel)
         {
-            _button = GetComponent<Button>();
             _scoreModel = scoreModel;
             _rankingLoader = RankingLoader.Instance;
         }
 
         private void Start()
         {
-            _button
+            GetComponent<Button>()
                 .OnClickAsObservable()
                 .Subscribe(_ => _rankingLoader.SendScoreAndShowRanking(_scoreModel.GetScore()))
                 .AddTo(this);

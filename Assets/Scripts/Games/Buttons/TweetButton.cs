@@ -18,19 +18,17 @@ namespace Games.Buttons
         private const string HASH_TAG1 = "unityroom";
         private const string HASH_TAG2 = "unity1week";
 
-        private Button _button;
         private IScoreModel _scoreModel;
 
         [Inject]
         private void Construct(IScoreModel scoreModel)
         {
-            _button = GetComponent<Button>();
             _scoreModel = scoreModel;
         }
 
         private void Start()
         {
-            _button
+            GetComponent<Button>()
                 .OnClickAsObservable()
                 .Subscribe(_ =>
                 {
