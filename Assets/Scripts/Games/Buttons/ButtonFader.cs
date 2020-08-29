@@ -30,7 +30,7 @@ namespace Games.Buttons
         /// </summary>
         public void PlayFadeIn()
         {
-            _button.FadeInButton();
+            _button.image.FadeInButton(() => _button.enabled = true);
 
             var position = _button.image.rectTransform.GetWorldPosition(_mainCamera);
             Instantiate(effect, position, Quaternion.identity);
